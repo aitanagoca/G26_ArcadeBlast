@@ -4,7 +4,7 @@ snake
 tug war (multiplayer)
 oca (multiplayer)
 
-Propostes Jan:
+Propostes Jan: Space Invaders - Asteroids - Tetriss
 
 Propostes Pau:
 
