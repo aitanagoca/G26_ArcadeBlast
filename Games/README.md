@@ -1,7 +1,4 @@
-Propostes Marc:
-sudoku
-
-tug war (multiplayer)
+Propostes Marc: sudoku, tug war (multiplayer)
 
 Propostes Jan: Space Invaders - Asteroids - Tetriss - Pong
 
