@@ -1,6 +1,6 @@
 ## Propostes Marc: 
 
-##### Sudoku
+#### Sudoku
 
 Joc de lògica basat en la posició de números en una graella. L'objectiu és omplir una graella 9x9 amb números, de manera que cada fila, columna i regió 3x3 contingui tots els números del 1 al 9 sense repetir cap.
 
