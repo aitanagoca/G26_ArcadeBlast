@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Arcade Blast - Contribuir</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body {
+            background-color: #ff66cc;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .header {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .header h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2em;
+            text-shadow: 0 5px #181818;
+        }
+
+        .form {
+            background-color: #fff;
+            color: #000;
+            padding: 20px;
+            padding-right: 50px;
+            padding-left: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+           	align-items: center;
+        }
+
+        .form h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5em;
+            text-shadow: 0 3px #181818;
+            color: #ff66cc;
+        }
+
+        .form textarea {
+            width: 80%;
+            height: 100px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .form input[type="file"] {
+            display: none;
+        }
+
+        .file-label {
+            display: inline-block;
+            background-color: #ff66cc;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            font-family: 'Roboto', sans-serif;
+            color: #000;
+        }
+
+        .form button {
+            background-color: #ff66cc;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        .form button:hover {
+            background-color: #f96eb4;
+        }
+
+        .back-button {
+            background-color: #333;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Arcade Blast</h1>
+        </div>
+        <div class="form">
+            <h2 id="form-title">La meva proposta és...</h2>
+            <textarea id="proposal-textarea" placeholder="Escriu aquí la teva proposta..."></textarea>
+            <label for="file-upload" class="file-label">Adjunta el teu joc aquí</label>
+            <input type="file" id="file-upload">
+            <div class="file-name" id="file-name"></div>
+            <button type="submit" id="submit-btn">ENVIAR</button>
+        </div>
+        <button class="back-button" id="back-btn">Tornar enrere</button>
+    </div>
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function(event) {
+            const fileName = event.target.files[0] ? event.target.files[0].name : '';
+            const fileNameDisplay = document.getElementById('file-name');
+            fileNameDisplay.textContent = fileName ? `🗸 ${fileName}` : '';
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', function() {
+            if (confirm('Segur que vols enviar la proposta?')) {
+                const form = document.querySelector('.form');
+                const title = document.getElementById('form-title');
+                title.textContent = 'Proposta enviada!';
+                
+                const textarea = document.getElementById('proposal-textarea');
+                textarea.style.display = 'none';
+
+                const fileLabel = document.querySelector('.file-label');
+                fileLabel.style.display = 'none';
+
+                const fileNameDisplay = document.getElementById('file-name');
+                fileNameDisplay.style.display = 'none';
+
+                const submitButton = document.getElementById('submit-btn');
+                submitButton.style.display = 'none';
+
+                const backButton = document.getElementById('back-btn');
+                backButton.textContent = "Tornar a la pàgina d'inici";
+            }
+        });
+
+        document.getElementById('back-btn').addEventListener('click', function() {
+            window.location.href = 'home-page.html'; // Cambia esto a la URL correcta
+        });
+    </script>
+</body>
+</html>

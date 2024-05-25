@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Iniciar sessió</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2d007d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 10px;
+            width: 400px;
+            padding: 20px 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.7em;
+            text-shadow: 0 4px #181818;
+            color: #8f6aff;
+        }
+
+        .login-container img {
+            width: 50px;
+            margin: 20px 0;
+        }
+
+        .form-field {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .form-field input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 5px 10px;
+            font-size: 1em;
+        }
+
+        .form-field input[type="password"] {
+            padding-right: 30px;
+        }
+
+        .form-field i {
+            margin-left: 5px;
+            margin-right: 5px;
+            color: #888;
+        }
+
+        .form-field .show-password {
+            cursor: pointer;
+        }
+
+        .remember-password {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .remember-password input {
+            margin-right: 10px;
+        }
+
+        .login-button {
+            background-color: #fa55a8;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .login-button:hover {
+            background-color: #f96eb4;
+        }
+
+        .google-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            color: #333;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+
+        .google-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .google-button img {
+            width: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Iniciar sessió</h1>
+        <img src="images/arcadeblast_icon.png" alt="Arcade Icon">
+        <div class="form-field">
+            <i class="fa fa-user"></i>
+            <input type="text" id="username" placeholder="Nom d’usuari o e-mail">
+        </div>
+        <div class="form-field">
+            <i class="fa fa-lock"></i>
+            <input type="password" id="password" placeholder="Contrasenya">
+            <i class="fa fa-eye show-password"></i>
+        </div>
+        <div class="remember-password">
+            <input type="checkbox" id="remember">
+            <label for="remember">Recordar contrasenya</label>
+        </div>
+        <button class="login-button" id="login-btn">Entrar</button>
+        <div class="google-button">
+            <img src="images/google_icon.webp" alt="Google Icon">
+            Iniciar sessió amb Google
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.show-password').forEach(item => {
+            item.addEventListener('click', event => {
+                let input = event.target.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    event.target.classList.remove('fa-eye');
+                    event.target.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    event.target.classList.remove('fa-eye-slash');
+                    event.target.classList.add('fa-eye');
+                }
+            });
+        });
+
+        document.getElementById('login-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (!username) {
+                alert("El nom d’usuari o e-mail és obligatori.");
+                return;
+            }
+
+            if (!password) {
+                alert("La contrasenya és obligatòria.");
+                return;
+            }
+
+            // Add actual login logic here (e.g., API call)
+
+            // If login is successful, redirect to home.html
+            window.location.href = 'home-page.html';
+        });
+    </script>
+</body>
+</html>

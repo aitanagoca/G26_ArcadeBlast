@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Blast</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Press Start 2P', cursive;
+            background-image: url('images/background.jpeg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        .arcade-container {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 5px #181818;
+        }
+
+        .arcade-machine {
+            background: #2c2f3300;
+            margin: auto;
+            width: 300px;
+            padding: 20px;
+        }
+
+        .screen-title {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 5px #181818;
+        }
+
+        .arcade-button {
+            background-color: #fa55a8;
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 0 2.5px #181818;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+            box-shadow: 0 2.5px #181818;
+            transition: background-color 0.3s;
+        }
+
+        .arcade-button:hover {
+            background-color: #f96eb4;
+        }
+
+        .arcade-button:active {
+            box-shadow: 0 2px #666;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+<body>
+    <div class="arcade-container">
+        <h1 class="title">ARCADE BLAST</h1>
+        <div class="arcade-machine">
+            <p class="screen-title">Comencem!</p>
+            <button class="arcade-button" onclick="location.href='login.html'">JUGAR</button>
+            <button class="arcade-button" onclick="location.href='register.html'">CREAR COMPTE</button>
+         </div>
+    </div>
+</body>
+</html>
