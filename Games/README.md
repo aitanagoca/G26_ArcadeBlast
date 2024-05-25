@@ -28,13 +28,13 @@ Un dels primers jocs d'arcada, en el qual dos jugadors controlen cada un una pal
 
 ## Propostes Pau:
 
-#### PACMAN 
+#### Pac-Man 
 
 Joc clàssic d'arcada en el qual el jugador controla un personatge que ha de menjar tots els punts d'una graella laberíntica mentre és perseguit per uns fantasmes. L'objectiu és completar cada nivell sense ser atrapat pels fantasmes.
 
-**Source:**  https://gist.github.com/onnayokheng/fd2ca1a74d9d427ff7461745afccac88) 
+**Source:**  https://gist.github.com/onnayokheng/fd2ca1a74d9d427ff7461745afccac88
 
-## SNAKE
+#### Snake
 
 En aquest joc, el jugador controla una serp que creix cada vegada que menja una peça de menjar. L'objectiu és menjar tantes peces com sigui possible sense xocar amb els límits dels marges del joc o amb la pròpia cua de la serp.
 
