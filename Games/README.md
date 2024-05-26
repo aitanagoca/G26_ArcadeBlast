@@ -36,9 +36,5 @@ Joc clàssic d'arcada en el qual el jugador controla un personatge que ha de men
 
 #### Snake
 
-En aquest joc, el jugador controla una serp que creix cada vegada que menja una peça de menjar. L'objectiu és menjar tantes peces com sigui possible sense xocar amb els límits dels marges del joc o amb la pròpia cua de la serp.
-
-**Source:** https://gist.github.com/ZiKT1229/5935a10ce818ea7b851ea85ecf55b4da
-
-
+En aquest joc, el jugador controla una serp que creix cada vegada que menja una peça de menjar. L'objectiu és menjar tantes peces com sigui possible sense xocar amb la pròpia cua de la serp.
 
