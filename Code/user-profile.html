@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +84,9 @@
             color: #666;
         }
 
-        .edit-button, .back-button, .save-button {
+        .edit-button,
+        .back-button,
+        .save-button {
             background-color: #fa55a8;
             border: none;
             color: white;
@@ -98,7 +101,9 @@
             transition: background-color 0.3s;
         }
 
-        .edit-button:hover, .back-button:hover, .save-button:hover {
+        .edit-button:hover,
+        .back-button:hover,
+        .save-button:hover {
             background-color: #f96eb4;
         }
 
@@ -141,16 +146,19 @@
             border-radius: 5px;
             font-size: 0.9em;
             font-weight: bold;
-            display: none; /* Initially hidden */
+            display: none;
+            /* Initially hidden */
         }
     </style>
 </head>
+
 <body>
     <div class="title">Arcade Blast</div>
     <div class="profile-container">
         <h1>Perfil</h1>
         <div style="position: relative;">
-            <img src="images/others/user_default_image.jpeg" alt="Imatge de perfil" class="profile-image" id="profile-image">
+            <img src="images/others/user_default_image.jpeg" alt="Imatge de perfil" class="profile-image"
+                id="profile-image">
             <input type="file" id="image-input" style="display: none;">
         </div>
         <div class="profile-info">
@@ -193,7 +201,7 @@
             contributorBadge.style.display = 'block';
         }
 
-        editBtn.addEventListener('click', function() {
+        editBtn.addEventListener('click', function () {
             editForm.style.display = 'block';
             profileInfo.style.display = 'none';
             editBtn.style.display = 'none';
@@ -201,7 +209,7 @@
             profileImage.style.cursor = 'pointer';
         });
 
-        saveBtn.addEventListener('click', function() {
+        saveBtn.addEventListener('click', function () {
             const username = document.getElementById('edit-username').value;
             const email = document.getElementById('edit-email').value;
 
@@ -226,26 +234,27 @@
             buttonContainer.insertBefore(editBtn, backBtn);
         });
 
-        profileImage.addEventListener('click', function() {
+        profileImage.addEventListener('click', function () {
             if (editForm.style.display === 'block') {
                 imageInput.click();
             }
         });
 
-        imageInput.addEventListener('change', function(event) {
+        imageInput.addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     profileImage.src = e.target.result;
                 }
                 reader.readAsDataURL(file);
             }
         });
 
-        backBtn.addEventListener('click', function() {
+        backBtn.addEventListener('click', function () {
             window.location.href = 'home-page.html';
         });
     </script>
 </body>
+
 </html>

@@ -1,179 +1,192 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Snake</title>
   <style>
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
 
-  body {
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  canvas {
-    border: 1px solid white;
-  }
-  #message {
-    color: white;
-    font-size: 24px;
-    display: none;
-  }
-  #score {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  #newGame {
-    display: none;
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+    body {
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    canvas {
+      border: 1px solid white;
+    }
+
+    #message {
+      color: white;
+      font-size: 24px;
+      display: none;
+    }
+
+    #score {
+      color: white;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    #newGame {
+      display: none;
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
+
 <body>
-<div id="score">Score: 0</div>
-<canvas width="400" height="400" id="game"></canvas>
-<div id="message">You Lost</div>
-<button id="newGame">New Game</button>
-<script>
-var canvas = document.getElementById('game');
-var context = canvas.getContext('2d');
-var message = document.getElementById('message');
-var scoreElement = document.getElementById('score');
-var newGameButton = document.getElementById('newGame');
+  <div id="score">Score: 0</div>
+  <canvas width="400" height="400" id="game"></canvas>
+  <div id="message">You Lost</div>
+  <button id="newGame">New Game</button>
+  <script>
+    var canvas = document.getElementById('game');
+    var context = canvas.getContext('2d');
+    var message = document.getElementById('message');
+    var scoreElement = document.getElementById('score');
+    var newGameButton = document.getElementById('newGame');
 
-var grid = 16;
-var count = 0;
-var score = 0;
-var gameRunning = true;
+    var grid = 16;
+    var count = 0;
+    var score = 0;
+    var gameRunning = true;
 
-var snake = {
-  x: 160,
-  y: 160,
-  dx: grid,
-  dy: 0,
-  cells: [],
-  maxCells: 4
-};
-var apple = {
-  x: 320,
-  y: 320
-};
+    var snake = {
+      x: 160,
+      y: 160,
+      dx: grid,
+      dy: 0,
+      cells: [],
+      maxCells: 4
+    };
+    var apple = {
+      x: 320,
+      y: 320
+    };
 
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
 
-function loop() {
-  if (!gameRunning) return;
+    function loop() {
+      if (!gameRunning) return;
 
-  requestAnimationFrame(loop);
+      requestAnimationFrame(loop);
 
-  if (++count < 4) {
-    return;
-  }
+      if (++count < 4) {
+        return;
+      }
 
-  count = 0;
-  context.clearRect(0,0,canvas.width,canvas.height);
+      count = 0;
+      context.clearRect(0, 0, canvas.width, canvas.height);
 
-  snake.x += snake.dx;
-  snake.y += snake.dy;
+      snake.x += snake.dx;
+      snake.y += snake.dy;
 
-  if (snake.x < 0) {
-    snake.x = canvas.width - grid;
-  }
-  else if (snake.x >= canvas.width) {
-    snake.x = 0;
-  }
-  
-  if (snake.y < 0) {
-    snake.y = canvas.height - grid;
-  }
-  else if (snake.y >= canvas.height) {
-    snake.y = 0;
-  }
+      if (snake.x < 0) {
+        snake.x = canvas.width - grid;
+      }
+      else if (snake.x >= canvas.width) {
+        snake.x = 0;
+      }
 
-  snake.cells.unshift({x: snake.x, y: snake.y});
+      if (snake.y < 0) {
+        snake.y = canvas.height - grid;
+      }
+      else if (snake.y >= canvas.height) {
+        snake.y = 0;
+      }
 
-  if (snake.cells.length > snake.maxCells) {
-    snake.cells.pop();
-  }
+      snake.cells.unshift({ x: snake.x, y: snake.y });
 
-  context.fillStyle = 'red';
-  context.fillRect(apple.x, apple.y, grid-1, grid-1);
+      if (snake.cells.length > snake.maxCells) {
+        snake.cells.pop();
+      }
 
-  context.fillStyle = 'green';
-  snake.cells.forEach(function(cell, index) {
-    context.fillRect(cell.x, cell.y, grid-1, grid-1);
+      context.fillStyle = 'red';
+      context.fillRect(apple.x, apple.y, grid - 1, grid - 1);
 
-    if (cell.x === apple.x && cell.y === apple.y) {
-      snake.maxCells++;
-      score += 10;
+      context.fillStyle = 'green';
+      snake.cells.forEach(function (cell, index) {
+        context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+
+        if (cell.x === apple.x && cell.y === apple.y) {
+          snake.maxCells++;
+          score += 10;
+          scoreElement.textContent = 'Score: ' + score;
+
+          apple.x = getRandomInt(0, 25) * grid;
+          apple.y = getRandomInt(0, 25) * grid;
+        }
+
+        for (var i = index + 1; i < snake.cells.length; i++) {
+          if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+            gameRunning = false;
+            message.style.display = 'block';
+            newGameButton.style.display = 'block';
+          }
+        }
+      });
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (!gameRunning) return;
+
+      if (e.which === 37 && snake.dx === 0) {
+        snake.dx = -grid;
+        snake.dy = 0;
+      }
+      else if (e.which === 38 && snake.dy === 0) {
+        snake.dy = -grid;
+        snake.dx = 0;
+      }
+      else if (e.which === 39 && snake.dx === 0) {
+        snake.dx = grid;
+        snake.dy = 0;
+      }
+      else if (e.which === 40 && snake.dy === 0) {
+        snake.dy = grid;
+        snake.dx = 0;
+      }
+    });
+
+    newGameButton.addEventListener('click', function () {
+      gameRunning = true;
+      message.style.display = 'none';
+      newGameButton.style.display = 'none';
+      score = 0;
       scoreElement.textContent = 'Score: ' + score;
+
+      snake.x = 160;
+      snake.y = 160;
+      snake.cells = [];
+      snake.maxCells = 4;
+      snake.dx = grid;
+      snake.dy = 0;
 
       apple.x = getRandomInt(0, 25) * grid;
       apple.y = getRandomInt(0, 25) * grid;
-    }
 
-    for (var i = index + 1; i < snake.cells.length; i++) {
-      if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
-        gameRunning = false;
-        message.style.display = 'block';
-        newGameButton.style.display = 'block';
-      }
-    }
-  });
-}
+      requestAnimationFrame(loop);
+    });
 
-document.addEventListener('keydown', function(e) {
-  if (!gameRunning) return;
+    requestAnimationFrame(loop);
 
-  if (e.which === 37 && snake.dx === 0) {
-    snake.dx = -grid;
-    snake.dy = 0;
-  }
-  else if (e.which === 38 && snake.dy === 0) {
-    snake.dy = -grid;
-    snake.dx = 0;
-  }
-  else if (e.which === 39 && snake.dx === 0) {
-    snake.dx = grid;
-    snake.dy = 0;
-  }
-  else if (e.which === 40 && snake.dy === 0) {
-    snake.dy = grid;
-    snake.dx = 0;
-  }
-});
-
-newGameButton.addEventListener('click', function() {
-  gameRunning = true;
-  message.style.display = 'none';
-  newGameButton.style.display = 'none';
-  score = 0;
-  scoreElement.textContent = 'Score: ' + score;
-
-  snake.x = 160;
-  snake.y = 160;
-  snake.cells = [];
-  snake.maxCells = 4;
-  snake.dx = grid;
-  snake.dy = 0;
-
-  apple.x = getRandomInt(0, 25) * grid;
-  apple.y = getRandomInt(0, 25) * grid;
-
-  requestAnimationFrame(loop);
-});
-
-requestAnimationFrame(loop);
-</script>
+    document.addEventListener('DOMContentLoaded', function () {
+            // Cambiar el nivel de zoom a 150%
+            document.body.style.zoom = "175%";
+        });
+  </script>
 </body>
+
 </html>

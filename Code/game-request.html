@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +53,7 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-           	align-items: center;
+            align-items: center;
         }
 
         .form h2 {
@@ -132,6 +133,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -148,18 +150,18 @@
         <button class="back-button" id="back-btn">Tornar enrere</button>
     </div>
     <script>
-        document.getElementById('file-upload').addEventListener('change', function(event) {
+        document.getElementById('file-upload').addEventListener('change', function (event) {
             const fileName = event.target.files[0] ? event.target.files[0].name : '';
             const fileNameDisplay = document.getElementById('file-name');
             fileNameDisplay.textContent = fileName ? `🗸 ${fileName}` : '';
         });
 
-        document.getElementById('submit-btn').addEventListener('click', function() {
+        document.getElementById('submit-btn').addEventListener('click', function () {
             if (confirm('Segur que vols enviar la proposta?')) {
                 const form = document.querySelector('.form');
                 const title = document.getElementById('form-title');
                 title.textContent = 'Proposta enviada!';
-                
+
                 const textarea = document.getElementById('proposal-textarea');
                 textarea.style.display = 'none';
 
@@ -177,9 +179,10 @@
             }
         });
 
-        document.getElementById('back-btn').addEventListener('click', function() {
+        document.getElementById('back-btn').addEventListener('click', function () {
             window.location.href = 'home-page.html'; // Cambia esto a la URL correcta
         });
     </script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -134,7 +135,8 @@
             width: 100%;
             height: 50vh;
             overflow: hidden;
-            border: 10px solid #fa55a8; /* Borde rosa */
+            border: 10px solid #fa55a8;
+            /* Borde rosa */
             box-sizing: border-box;
         }
 
@@ -169,9 +171,11 @@
             background-color: #ff66cc;
             color: #fff;
             border: none;
-            padding: 1em 2em; /* Tamaño ajustado */
+            padding: 1em 2em;
+            /* Tamaño ajustado */
             border-radius: 10px;
-            font-size: 1em; /* Tamaño ajustado */
+            font-size: 1em;
+            /* Tamaño ajustado */
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
             transition: background-color 0.3s;
@@ -195,7 +199,8 @@
 
         .review-container h2 {
             font-family: 'Press Start 2P', cursive;
-            font-size: 1em; /* Tamaño ajustado */
+            font-size: 1em;
+            /* Tamaño ajustado */
             margin-bottom: 10px;
             color: #fff;
             text-shadow: 0 3px #181818;
@@ -203,11 +208,12 @@
 
         .review-container textarea {
             width: 100%;
-            height: 100px;
+            height: 200px;
             border: 2px solid #ccc;
             border-radius: 10px;
             padding: 10px;
-            font-size: 1em; /* Tamaño ajustado */
+            font-size: 1em;
+            /* Tamaño ajustado */
             font-family: 'Roboto', sans-serif;
             margin-bottom: 10px;
             box-sizing: border-box;
@@ -217,9 +223,11 @@
             background-color: #ff66cc;
             color: #fff;
             border: none;
-            padding: 1em 2em; /* Tamaño ajustado */
+            padding: 1em 2em;
+            /* Tamaño ajustado */
             border-radius: 10px;
-            font-size: 1em; /* Tamaño ajustado */
+            font-size: 1em;
+            /* Tamaño ajustado */
             cursor: pointer;
             font-family: 'Roboto', sans-serif;
             transition: background-color 0.3s;
@@ -228,8 +236,22 @@
         .review-container button:hover {
             background-color: #f96eb4;
         }
+
+        .back-button {
+            position: fixed;
+            bottom: 150px;
+            /* Ajusta la distancia desde la parte inferior según tu preferencia */
+            left: 25px;
+            /* Ajusta la distancia desde la izquierda según tu preferencia */
+            z-index: 1000;
+            background-color: #ff66cc00;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
@@ -243,7 +265,8 @@
             <li><a href="#"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
         </ul>
         <ul>
-            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols Contribuir?</a></li>
+            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols
+                    Contribuir?</a></li>
             <li><a href="#"><i class="fas fa-cogs"></i> Configuració</a></li>
         </ul>
     </div>
@@ -262,7 +285,7 @@
     <div class="game-info">
         <div class="game-details">
             <div class="game-title">MAZE</div>
-            <button class="play-button" onclick="location.href='games/maze-game.html'">JUGAR</button>
+            <button class="play-button" onclick="window.open('games/maze-game.html', '_blank')">JUGAR</button>
         </div>
         <div class="review-container">
             <h2>Deixa una ressenya sobre el joc...</h2>
@@ -270,7 +293,8 @@
             <button type="submit">ENVIAR</button>
         </div>
     </div>
-
+    <button class="back-button" onclick="location.href='home-page.html'"> <i class="fas fa-arrow-left"></i> TORNAR A
+        L'INICI </button>
     <script>
         function toggleMenu() {
             document.getElementById('side-panel').classList.toggle('active');
@@ -288,4 +312,5 @@
         }
     </script>
 </body>
+
 </html>
