@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Arcade Blast</title>
-    <link rel="icon" href="images/arcadeblast_icon.png" type="image/png">
+    <link rel="icon" href="images/icons/arcadeblast_icon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -184,8 +185,8 @@
             overflow: hidden;
             text-align: center;
             transition: transform 0.3s;
-            width: 300px;
-            height: 270px;
+            width: 350px;
+            height: 300px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -202,12 +203,24 @@
         }
 
         .game-card h3 {
-            margin: 10px 0;
             font-size: 1.5em;
             color: #333;
         }
+
+        .game-card .cover-image {
+            width: 100%;
+            height: 80%;
+            overflow: hidden;
+        }
+
+        .game-card .cover-image img {
+            width: 100%;
+            height: auto;
+            margin-top: -35px;
+        }
     </style>
 </head>
+
 <body>
     <div class="header">
         <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
@@ -221,7 +234,8 @@
             <li><a href="#"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
         </ul>
         <ul>
-            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols Contribuir?</a></li>
+            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols
+                    Contribuir?</a></li>
             <li><a href="#"><i class="fas fa-cogs"></i> Configuració</a></li>
         </ul>
     </div>
@@ -244,34 +258,44 @@
             <button onclick="filterGames('esportiu')"><i class="fas fa-futbol"></i> Esportiu</button>
         </div>
         <div class="games-grid">
+            <div class="game-card" data-category="accio" onclick="location.href='brickbreaker-page.html'">
+                <img src="images/covers/brickbreaker_cover.png" alt="Brick Breaker">
+                <h3>Brick Breaker</h3>
+            </div>
             <div class="game-card" data-category="accio" onclick="location.href='tugwar-page.html'">
-                <img src="images/tugwar_cover.webp" alt="Drunken Tug War">
+                <img src="images/covers/tugwar_cover.webp" alt="Drunken Tug War">
                 <h3>Drunken Tug War</h3>
             </div>
+            <div class="game-card" data-category="aventura" onclick="location.href='maze-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/maze_cover.png" alt="Maze">
+                </div>
+                <h3>Maze</h3>
+            </div>
             <div class="game-card" data-category="accio" onclick="location.href='pacman-page.html'">
-                <img src="images/pacman_cover.jpeg" alt="Pac-Man">
+                <img src="images/covers/pacman_cover.jpeg" alt="Pac-Man">
                 <h3>Pac-Man</h3>
             </div>
             <div class="game-card" data-category="esportiu" onclick="location.href='pong-page.html'">
-                <img src="images/pong_cover.png" alt="Pong Classic">
+                <img src="images/covers/pong_cover.png" alt="Pong Classic">
                 <h3>Pong Classic</h3>
             </div>
             <div class="game-card" data-category="estrategia" onclick="location.href='snake-page.html'">
-                <img src="images/snake_cover.avif" alt="Snake">
+                <img src="images/covers/snake_cover.avif" alt="Snake">
                 <h3>Snake</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='spaceinvaders-page.html'">
-                <img src="images/spaceinvaders_cover.jpeg" alt="Space Invaders">
+                <img src="images/covers/spaceinvaders_cover.jpeg" alt="Space Invaders">
                 <h3>Space Invaders</h3>
             </div>
             <div class="game-card" data-category="estrategia" onclick="location.href='sudoku-page.html'">
-                <img src="images/sudoku_cover.jpeg" alt="Sudoku">
+                <img src="images/covers/sudoku_cover.jpeg" alt="Sudoku">
                 <h3>Sudoku</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='tetris-page.html'">
-                <img src="images/tetris_cover.webp" alt="Tetris">
+                <img src="images/covers/tetris_cover.webp" alt="Tetris">
                 <h3>Tetris</h3>
-            </div>  
+            </div>
         </div>
     </div>
 
@@ -333,7 +357,7 @@
         }
 
         document.querySelector('.category-buttons button').classList.add('active'); // Set 'Tots' as default active
-        
+
         function confirmLogout() {
             const logoutConfirmed = confirm('Estàs segur que vols tancar sessió?');
             if (logoutConfirmed) {
@@ -342,4 +366,5 @@
         }
     </script>
 </body>
+
 </html>

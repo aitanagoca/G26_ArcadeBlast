@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Brick Breaker - Arcade Blast</title>
+    <link rel="icon" href="images/icons/arcadeblast_icon.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2d007d;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background-color: #fa55a8;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        .header .search-bar {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 20px;
+            width: 60%;
+            font-size: 1em;
+        }
+
+        .header .user-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        .side-panel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 250px;
+            background-color: rgba(255, 105, 180, 0.9);
+            padding: 20px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .side-panel.active {
+            transform: translateX(0);
+        }
+
+        .side-panel ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .side-panel ul li {
+            margin: 20px 0;
+        }
+
+        .side-panel ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+
+        .side-panel ul li a i {
+            margin-right: 10px;
+        }
+
+        .user-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 250px;
+            background-color: rgba(255, 105, 180, 0.9);
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .user-panel.active {
+            transform: translateX(0);
+        }
+
+        .user-panel ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .user-panel ul li {
+            margin: 20px 0;
+        }
+
+        .user-panel ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-panel ul li a i {
+            margin-right: 10px;
+        }
+
+        .game-container {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            overflow: hidden;
+            border: 10px solid #fa55a8; /* Borde rosa */
+            box-sizing: border-box;
+        }
+
+        .game-container img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            margin-top: -600px;
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #2d007d;
+        }
+
+        .game-details {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .game-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .play-button {
+            background-color: #ff66cc;
+            color: #fff;
+            border: none;
+            padding: 1em 2em; /* Tamaño ajustado */
+            border-radius: 10px;
+            font-size: 1em; /* Tamaño ajustado */
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            transition: background-color 0.3s;
+        }
+
+        .play-button:hover {
+            background-color: #f96eb4;
+        }
+
+        .review-container {
+            flex: 1;
+            background-color: #2c2c5400;
+            border-radius: 10px;
+            padding: 20px;
+            margin-left: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .review-container h2 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em; /* Tamaño ajustado */
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 0 3px #181818;
+        }
+
+        .review-container textarea {
+            width: 100%;
+            height: 100px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 1em; /* Tamaño ajustado */
+            font-family: 'Roboto', sans-serif;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .review-container button {
+            background-color: #ff66cc;
+            color: #fff;
+            border: none;
+            padding: 1em 2em; /* Tamaño ajustado */
+            border-radius: 10px;
+            font-size: 1em; /* Tamaño ajustado */
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.3s;
+        }
+
+        .review-container button:hover {
+            background-color: #f96eb4;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+        <input type="text" class="search-bar" placeholder="A què juguem?">
+        <i class="fas fa-user user-icon" onclick="toggleUserPanel()"></i>
+    </div>
+    <div class="side-panel" id="side-panel">
+        <ul>
+            <li><a href="#"><i class="fas fa-star"></i> Destacats</a></li>
+            <li><a href="#"><i class="fas fa-trophy"></i> Rankings</a></li>
+            <li><a href="#"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
+        </ul>
+        <ul>
+            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols Contribuir?</a></li>
+            <li><a href="#"><i class="fas fa-cogs"></i> Configuració</a></li>
+        </ul>
+    </div>
+    <div class="user-panel" id="user-panel">
+        <ul>
+            <li><a href="#" onclick="location.href='user-profile.html'"><i class="fas fa-user"></i> Perfil</a></li>
+            <li><a href="#"><i class="fas fa-users"></i> Amics</a></li>
+        </ul>
+        <ul>
+            <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Tancar sessió</a></li>
+        </ul>
+    </div>
+    <div class="game-container">
+        <img src="images/banners/brickbreaker-banner.jpg" alt="Pac-Man">
+    </div>
+    <div class="game-info">
+        <div class="game-details">
+            <div class="game-title">BRICK BREAKER</div>
+            <button class="play-button" onclick="location.href='games/brickbreaker-game.html'">JUGAR</button>
+        </div>
+        <div class="review-container">
+            <h2>Deixa una ressenya sobre el joc...</h2>
+            <textarea placeholder="Escriu aquí la teva ressenya..."></textarea>
+            <button type="submit">ENVIAR</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('side-panel').classList.toggle('active');
+        }
+
+        function toggleUserPanel() {
+            document.getElementById('user-panel').classList.toggle('active');
+        }
+
+        function confirmLogout() {
+            const logoutConfirmed = confirm('Estàs segur que vols tancar sessió?');
+            if (logoutConfirmed) {
+                window.location.href = 'welcome.html'; // Redirigir a la página de bienvenida si el usuario confirma el cierre de sesión
+            }
+        }
+    </script>
+</body>
+</html>

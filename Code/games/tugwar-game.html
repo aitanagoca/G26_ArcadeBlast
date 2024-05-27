@@ -1,0 +1,348 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tug War</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: black;
+        }
+        h1 {
+            font-size: 4rem;
+            text-align: center;
+            background-color: black;
+            color: darkslategray;
+            text-shadow: 0 0 8px white;
+            padding-bottom: 6rem; 
+        }
+        #screen-container{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+        #instructions {
+            max-width: 400px;
+            position: relative;
+            display: block;
+            top: -80%;
+            color: white;
+            padding: 20px;
+            margin: auto auto;
+        }
+        #instructions h2 {
+           font-size: 1.5rem;
+        }
+        #instructions p {
+            font-size: 1rem;
+        }
+        #game-container{
+            display: flex;
+            flex-wrap: no-wrap;
+            justify-content: space-around;
+            width: 80%;
+            max-width: 800px;
+            height: 80%;
+            background-image: linear-gradient(black, black, blue, skyblue, white);
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+        .central-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;;
+            width: 20%;
+            height: 100%;
+            
+            text-align: center;
+        }
+        #totem {
+            position: relative;
+            background-image: linear-gradient(#999 80%, #666);
+            height: 40%;
+            width: 10vw;
+            max-width: 100px;
+            transform-origin: center bottom;
+            border-radius: 10% 10% 5% 5%;
+        }
+        .face {
+            display: block;
+            font-family: "courier new", monospace;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: grey;
+            text-shadow: 2px 0 6px black;
+            padding: 0 50%;
+            transform: rotate(90deg);
+        }
+        #base {
+            height: 20%;
+            width: 100%;
+            background-image: linear-gradient(#999 20%, #666);
+            border-radius: 10% 10% 0 0;
+        }
+
+        .sky {
+            height: 50%;            
+        }
+        .player-area{
+            width: 40%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            text-align: center;
+        }
+        .ground {
+            height: 10%;
+            background-color: #3a3;
+        }
+        .left .player-line{
+            background-color: #f66;
+        }
+        .right .player-line{
+            background-color: #66f;
+        }
+        .key {
+            padding: 4px;
+            margin: 4px;
+            font-family: "courier new", monospace;
+            font-weight: bold;
+            border: 1px solid black;
+            background-color: white;
+        }
+        .curator {
+            padding: 20px;
+            font-family: "courier",monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: -6px;
+            transform-origin: center;
+            transform: rotate(90deg);
+        }
+        .one {
+            color: red;
+        }
+        .two {
+            color: blue;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h1>TUG OF MOAI</h1>
+    <div id="screen-container">
+        <div id="game-container">
+            <div class="left player-area"><div class="sky"></div>
+            <div class="curator one">O|=<</div>
+            <div class="player-line">P1 (Type: <span class="key">E</span>,<span class="key">S</span>,<span class="key">Z</span>)</div>
+            <div class="ground"><span class="p1wins">WINS: 0</span></div></div>
+        
+            <div class="central-area">
+                <div id="totem"><span class="face">=:¬O-</span></div>
+                <div id="base"></div>
+            </div>
+
+            <div class="right player-area"><div class="sky"></div>
+            <div class="curator two">O|=<</div>
+            <div class="player-line">P2 (Type: <span class="key">I</span>,<span class="key">L</span>,<span class="key">></span>)</div>
+            <div class="ground"><span class="p2wins">WINS: 0</span></div></div>
+    
+        </div>
+
+        <div id="instructions"><h2>HOW TO PLAY:</h2><p>Dragging down the ancient Moai head to display in your museum back home will bring big bucks and royal favour but make sure you type faster than your rival, or you'll be sailing home empty-handed!</p><p>Type the  sequence of keyboard characters to drag the Moai towards your curator - be quick but don't mistype!</p></div>
+
+    </div>
+
+    
+
+
+    <script>
+        const totem = document.getElementById("totem");
+        const playerOneWinEl = document.getElementsByClassName("p1wins");
+        const playerTwoWinEl = document.getElementsByClassName("p2wins");
+        const faceFeatures = document.getElementsByClassName("face");
+
+        //select a random face
+        makeFace(Math.floor(Math.random() * 10));
+
+        let playerTwoScore = 0;
+        let playerOneScore = 0;
+
+        let moaiTipPoint = 70;
+        let moaiFallPoint = 90;
+
+        let moaiHasFallen = false;
+        let positionOfMoai = 0;
+        let playerOnePrevKey = "Z";
+        let playerTwoPrevKey = ">";
+
+        // main game loop
+        document.addEventListener("keydown", function(key){
+
+            if(key.defaultPrevented){
+                return; // do nothing if key already handled
+            }
+
+            if(!moaiHasFallen){
+                // game loop
+                checkInput(key.code);
+                moveMoai(positionOfMoai);
+            }
+
+            // use up key press so it isn't handled twice
+            key.preventDefault;
+
+        }, true);
+
+        function checkInput(keyCodePressed){
+            
+            switch(keyCodePressed) {
+                case "KeyE":
+                    if(playerOnePrevKey=="Z"){
+                        playerOnePrevKey="E";
+                        positionOfMoai -= 1;
+                    }
+                    break;
+
+                case "KeyI":
+                    if(playerTwoPrevKey==">"){
+                        playerTwoPrevKey="I";
+                        positionOfMoai += 1;
+                    }
+                    break;
+
+                case "KeyS":
+                    if(playerOnePrevKey=="E"){
+                        playerOnePrevKey="S";
+                        positionOfMoai -= 1;
+                    }
+                    break;
+
+                case "KeyL":
+                    if(playerTwoPrevKey=="I"){
+                        playerTwoPrevKey="L";
+                        positionOfMoai += 1;
+                    }
+                    break;
+
+                case "KeyZ":
+                    if(playerOnePrevKey=="S"){
+                        playerOnePrevKey="Z";
+                        positionOfMoai -= 2;
+                    }
+                    break;
+                
+                case "Period":
+                    if(playerTwoPrevKey=="L"){
+                        playerTwoPrevKey=">";
+                        positionOfMoai += 2;
+                    }
+                    break;
+                
+            }
+
+        }
+    
+        function moveMoai(positionOfMoai){
+
+            //console.log(positionOfMoai);
+
+            if(Math.abs(positionOfMoai)<moaiTipPoint){
+                // translate totem div
+                totem.style.transform = `translate(${positionOfMoai}px,0px)`;
+                
+            }else if(Math.abs(positionOfMoai)<=moaiFallPoint){
+                // rotate totem div
+                if(positionOfMoai<0){
+                    totem.style.transform = `rotate(-${Math.abs(positionOfMoai)-moaiTipPoint}deg) translate(${positionOfMoai}px,0px)`;
+                }else{
+                    totem.style.transform = `rotate(${Math.abs(positionOfMoai)-moaiTipPoint}deg) translate(${positionOfMoai}px,0px)`;
+                }
+            }else{
+                // totem falls and player wins
+                moaiHasFallen = true;
+
+                if(positionOfMoai<-90){
+                    playerOneScore += 1;
+                    gameOver(1)
+                }else{
+                    playerTwoScore += 1;
+                    gameOver(2)
+                }
+            }
+
+        }
+
+        function gameOver(winner) {
+            // update Scores
+            playerOneWinEl[0].innerHTML = "WINS: " + playerOneScore;
+            playerTwoWinEl[0].innerHTML = "WINS: " + playerTwoScore;
+
+            alert("Player "+winner+" claimed the Moai!\nGO FOR THE NEXT MOAI!!!");
+
+            resetGame();
+        }
+    
+        function resetGame() {
+
+            makeFace(Math.floor(Math.random() * 10));
+
+            positionOfMoai = 0;
+            moaiHasFallen = false;
+
+            playerOnePrevKey = "Z";
+            playerTwoPrevKey = ">";
+
+            moveMoai(0);
+            checkInput(0);
+
+        }
+
+        function makeFace(faceType){
+            switch(faceType) {
+                case 0:
+                    faceFeatures[0].innerHTML = "=:¬O-";
+                break;
+                case 1:
+                    faceFeatures[0].innerHTML = "{:¬]-";
+                break;
+                case 2:
+                    faceFeatures[0].innerHTML = ">;¬( ";
+                break;
+                case 3:
+                    faceFeatures[0].innerHTML = "|:'o) ";
+                break;
+                case 4:
+                    faceFeatures[0].innerHTML = "}:¬,|";
+                break;
+                case 5:
+                    faceFeatures[0].innerHTML = "=:>O-";
+                break;
+                case 6:
+                    faceFeatures[0].innerHTML = "$:-)-";
+                break;
+                case 7:
+                    faceFeatures[0].innerHTML = ">:¬(-";
+                break;
+                case 8:
+                    faceFeatures[0].innerHTML = "~:¬E";
+                break;
+                case 9:
+                    faceFeatures[0].innerHTML = "=}:¬o";
+                break;
+            }
+        }
+
+
+    </script>
+</body>
+</html>
