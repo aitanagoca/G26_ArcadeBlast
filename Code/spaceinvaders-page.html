@@ -140,10 +140,15 @@
             box-sizing: border-box;
         }
 
-        .game-container img {
+        .game-container video {
+            position: relative;
+            top: 50%;
+            left: 50%;
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
+                
+            transform: translate(-50%, -50%);
         }
 
         .game-info {
@@ -280,12 +285,15 @@
         </ul>
     </div>
     <div class="game-container">
-        <img src="images/banners/spaceinvaders-banner.webp" alt="Pac-Man">
+        <video autoplay loop muted playsinline>
+            <source src="videos/space_invaders_loop_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
     <div class="game-info">
         <div class="game-details">
             <div class="game-title">SPACE INVADERS</div>
-            <button class="play-button" onclick="window.open('games/spaceinvaders-game.html', '_blank')">JUGAR</button>
+            <button             class="play-button" onclick="window.open('games/spaceinvaders-game.html', '_blank')">JUGAR</button>
         </div>
         <div class="review-container">
             <h2>Deixa una ressenya sobre el joc...</h2>
@@ -314,3 +322,4 @@
 </body>
 
 </html>
+
