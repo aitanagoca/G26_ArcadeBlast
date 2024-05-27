@@ -1,3 +1,13 @@
+## Propostes Aitana: 
+
+#### Brick Breaker
+
+Aquest joc clàssic d'arcade consisteix en una paleta que el jugador mou horitzontalment a la part inferior de la pantalla per fer rebotar una pilota. A la part superior de la pantalla hi ha una formació de blocs o maons que la pilota ha de colpejar i destruir. L'objectiu és trencar tots els maons sense deixar que la pilota caigui per la part inferior de la pantalla. A mesura que la pilota rebota contra els blocs i les parets, el jugador ha de continuar movent la paleta per mantenir-la en joc.
+
+#### Maze
+
+En aquest tipus de joc, el jugador ha de navegar per un laberint per arribar a un punt de sortida o objectiu. Els laberints poden variar en complexitat, amb camins que es bifurquen, carrerons sense sortida i altres obstacles. L'objectiu és trobar la ruta correcta a través del laberint el més ràpidament possible. Alguns jocs de laberints poden incloure elements addicionals, com ara enemics, temporitzadors, o objectes col·leccionables.
+
 ## Propostes Marc: 
 
 #### Sudoku
