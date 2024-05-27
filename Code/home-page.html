@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Arcade Blast</title>
+    <link rel="icon" href="images/arcadeblast_icon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -243,30 +244,34 @@
             <button onclick="filterGames('esportiu')"><i class="fas fa-futbol"></i> Esportiu</button>
         </div>
         <div class="games-grid">
-            <div class="game-card" data-category="accio">
-                <img src="images/tetris_cover.webp" alt="Tetris">
-                <h3>Tetris</h3>
+            <div class="game-card" data-category="accio" onclick="location.href='tugwar-page.html'">
+                <img src="images/tugwar_cover.webp" alt="Drunken Tug War">
+                <h3>Drunken Tug War</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='pacman-page.html'">
                 <img src="images/pacman_cover.jpeg" alt="Pac-Man">
                 <h3>Pac-Man</h3>
             </div>
-            <div class="game-card" data-category="estrategia">
-                <img src="images/sudoku_cover.jpeg" alt="Sudoku">
-                <h3>Sudoku</h3>
-            </div>
-            <div class="game-card" data-category="esportiu">
+            <div class="game-card" data-category="esportiu" onclick="location.href='pong-page.html'">
                 <img src="images/pong_cover.png" alt="Pong Classic">
                 <h3>Pong Classic</h3>
             </div>
-            <div class="game-card" data-category="accio">
-                <img src="images/tugwar_cover.webp" alt="Drunken Tug War">
-                <h3>Drunken Tug War</h3>
+            <div class="game-card" data-category="estrategia" onclick="location.href='snake-page.html'">
+                <img src="images/snake_cover.avif" alt="Snake">
+                <h3>Snake</h3>
             </div>
-            <div class="game-card" data-category="accio">
+            <div class="game-card" data-category="accio" onclick="location.href='spaceinvaders-page.html'">
                 <img src="images/spaceinvaders_cover.jpeg" alt="Space Invaders">
                 <h3>Space Invaders</h3>
             </div>
+            <div class="game-card" data-category="estrategia" onclick="location.href='sudoku-page.html'">
+                <img src="images/sudoku_cover.jpeg" alt="Sudoku">
+                <h3>Sudoku</h3>
+            </div>
+            <div class="game-card" data-category="accio" onclick="location.href='tetris-page.html'">
+                <img src="images/tetris_cover.webp" alt="Tetris">
+                <h3>Tetris</h3>
+            </div>  
         </div>
     </div>
 
