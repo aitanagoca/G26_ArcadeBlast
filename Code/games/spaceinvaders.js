@@ -264,21 +264,21 @@ function levelUp() {
 function drawScore() {
     context.fillStyle = 'white';
     context.font = '20px Arial';
-    context.fillText('Score: ' + score, 8, 20);
+    context.fillText('Puntuació: ' + score, 8, 20);
 }
 
 // Draw lives
 function drawLives() {
     context.fillStyle = 'white';
     context.font = '20px Arial';
-    context.fillText('Lives: ' + lives, canvas.width - 100, 20);
+    context.fillText('Vides: ' + lives, canvas.width - 100, 20);
 }
 
 // Draw level
 function drawLevel() {
     context.fillStyle = 'white';
     context.font = '20px Arial';
-    context.fillText('Level: ' + level, canvas.width / 2 - 50, 20);
+    context.fillText('Nivell: ' + level, canvas.width / 2 - 50, 20);
 }
 
 // Update game canvas

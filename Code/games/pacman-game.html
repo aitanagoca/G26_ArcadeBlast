@@ -5,8 +5,10 @@
     <title>Pac-Man</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Permanent+Marker">
     <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
         body {
-            background-color: black;
+            background-color: #2d007d;
         }
 
         #pacman {
@@ -17,13 +19,14 @@
         }
 
         #shim {
-            font-family: 'Permanent Marker', cursive;
+            font-family: 'Press Start 2P', cursive;
             position: absolute;
-            visibility: hidden
+            text-align: center;
+            visibility: hidden;
         }
 
         h1 {
-            font-family: 'Permanent Marker', cursive;
+            font-family: 'Press Start 2P', cursive;
             text-align: center;
             color: yellow;
         }
@@ -1106,7 +1109,7 @@
                 }
 
                 map.draw(ctx);
-                dialog("Loading ...");
+                dialog("Carregant ...");
 
                 var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 

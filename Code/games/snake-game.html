@@ -11,7 +11,7 @@
     }
 
     body {
-      background: black;
+      background:#2d007d;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -20,6 +20,7 @@
 
     canvas {
       border: 1px solid white;
+      background-color: white;
     }
 
     #message {
@@ -45,10 +46,10 @@
 </head>
 
 <body>
-  <div id="score">Score: 0</div>
+  <div id="score">Puntuació: 0</div>
   <canvas width="400" height="400" id="game"></canvas>
-  <div id="message">You Lost</div>
-  <button id="newGame">New Game</button>
+  <div id="message">Has perdut!</div>
+  <button id="newGame">Nova Partida</button>
   <script>
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
@@ -93,18 +94,12 @@
       snake.x += snake.dx;
       snake.y += snake.dy;
 
-      if (snake.x < 0) {
-        snake.x = canvas.width - grid;
-      }
-      else if (snake.x >= canvas.width) {
-        snake.x = 0;
+      if (snake.x < 0 || snake.x >= canvas.width) {
+        snake.dx = -snake.dx;
       }
 
-      if (snake.y < 0) {
-        snake.y = canvas.height - grid;
-      }
-      else if (snake.y >= canvas.height) {
-        snake.y = 0;
+      if (snake.y < 0 || snake.y >= canvas.height) {
+        snake.dy = -snake.dy;
       }
 
       snake.cells.unshift({ x: snake.x, y: snake.y });
@@ -121,9 +116,11 @@
         context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
 
         if (cell.x === apple.x && cell.y === apple.y) {
-          snake.maxCells++;
           score += 10;
-          scoreElement.textContent = 'Score: ' + score;
+          scoreElement.textContent = 'Puntuació: ' + score;
+
+          // Hacer que la serpiente crezca un cuadro
+          snake.maxCells++;
 
           apple.x = getRandomInt(0, 25) * grid;
           apple.y = getRandomInt(0, 25) * grid;
@@ -165,7 +162,7 @@
       message.style.display = 'none';
       newGameButton.style.display = 'none';
       score = 0;
-      scoreElement.textContent = 'Score: ' + score;
+      scoreElement.textContent = 'Puntuació: ' + score;
 
       snake.x = 160;
       snake.y = 160;

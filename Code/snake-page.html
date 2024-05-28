@@ -167,6 +167,12 @@
             margin-bottom: 20px;
         }
 
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         .play-button {
             background-color: #ff66cc;
             color: #fff;
@@ -238,16 +244,20 @@
         }
 
         .back-button {
-            position: fixed;
-            bottom: 150px;
-            /* Ajusta la distancia desde la parte inferior según tu preferencia */
-            left: 25px;
-            /* Ajusta la distancia desde la izquierda según tu preferencia */
-            z-index: 1000;
-            background-color: #ff66cc00;
+            background-color: #2d007d;
             border: none;
             color: white;
-            font-size: 1.2em;
+            padding: 0.5em 1em;
+            border-radius: 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #3e1388;
         }
     </style>
 </head>
@@ -285,7 +295,12 @@
     <div class="game-info">
         <div class="game-details">
             <div class="game-title">SNAKE</div>
-            <button class="play-button" onclick="window.open('games/snake-game.html', '_blank')">JUGAR</button>
+            <div class="buttons-container">
+                <button class="play-button" onclick="window.open('games/snake-game.html', '_blank')">JUGAR</button>
+                <button class="back-button" onclick="location.href='home-page.html'"> <i class="fas fa-arrow-left"></i>
+                    TORNAR A
+                    L'INICI </button>
+            </div>
         </div>
         <div class="review-container">
             <h2>Deixa una ressenya sobre el joc...</h2>
@@ -293,8 +308,6 @@
             <button type="submit">ENVIAR</button>
         </div>
     </div>
-    <button class="back-button" onclick="location.href='home-page.html'"> <i class="fas fa-arrow-left"></i> TORNAR A
-        L'INICI </button>
     <script>
         function toggleMenu() {
             document.getElementById('side-panel').classList.toggle('active');
