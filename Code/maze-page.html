@@ -142,7 +142,7 @@
 
         .game-container img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
         }
 
@@ -164,13 +164,52 @@
         .game-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 2em;
-            margin-bottom: 20px;
+        }
+
+        .game-description {
+            background-color: rgba(255, 255, 255, 0);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-size: 1.33em;
+        }
+
+        .instructions {
+            background-color: #20cbff;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            color: #2d007d;
+            font-weight: bold;
+        }
+
+        .keys-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        .keys-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .key {
+            background-color: #fff;
+            color: #ff66cc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            font-size: 1.5em;
         }
 
         .buttons-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 20px;
         }
 
         .play-button {
@@ -191,6 +230,25 @@
             background-color: #f96eb4;
         }
 
+        .back-button {
+            margin-top: 10px;
+            background-color: #2d007d;
+            border: none;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+            /* Alinea el botón a la izquierda */
+        }
+
+        .back-button:hover {
+            background-color: #3e1388;
+        }
+
         .review-container {
             flex: 1;
             background-color: #2c2c5400;
@@ -209,7 +267,6 @@
             /* Tamaño ajustado */
             margin-bottom: 10px;
             color: #fff;
-            text-shadow: 0 3px #181818;
         }
 
         .review-container textarea {
@@ -241,23 +298,6 @@
 
         .review-container button:hover {
             background-color: #f96eb4;
-        }
-
-        .back-button {
-            background-color: #2d007d;
-            border: none;
-            color: white;
-            padding: 0.5em 1em;
-            border-radius: 10px;
-            font-size: 0.8em;
-            cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .back-button:hover {
-            background-color: #3e1388;
         }
     </style>
 </head>
@@ -293,11 +333,22 @@
         <img src="images/banners/maze-banner.png" alt="Maze Game">
     </div>
     <div class="game-info">
+        <button class="back-button" onclick="location.href='home-page.html'"><i class="fas fa-arrow-left"></i> TORNAR A
+            L'INICI </button>
         <div class="game-details">
             <div class="game-title">MAZE</div>
+            <div class="game-description">
+                <p>El joc de laberint és un clàssic arcade en el qual has de navegar a través d'un complicat laberint
+                    fins a arribar a la sortida. Troba la sortida abans que s'acabi el temps i
+                    supera els diferents nivells plens de desafiaments. Recorda, cada laberint és una nova aventura!</p>
+            </div>
+            <div class="instructions">
+                <p><i class="fas fa-info-circle"></i> Utilitza les tecles de direcció per moure el teu personatge pel
+                    laberint i evita els obstacles que trobis pel camí.</p>
+            </div>
+
             <div class="buttons-container">
                 <button class="play-button" onclick="window.open('games/maze-game.html', '_blank')">JUGAR</button>
-                <button class="back-button" onclick="location.href='home-page.html'"><i class="fas fa-arrow-left"></i> TORNAR A L'INICI</button>
             </div>
         </div>
         <div class="review-container">

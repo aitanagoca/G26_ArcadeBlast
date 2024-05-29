@@ -11,7 +11,7 @@
     }
 
     body {
-      background:#2d007d;
+      background: #2d007d;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -21,6 +21,10 @@
     canvas {
       border: 1px solid white;
       background-color: white;
+      background-image: linear-gradient(rgb(189, 189, 189) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(189, 189, 189) 1px, transparent 1px);
+      /* Define la cuadrícula */
+      background-size: 16px 16px;
     }
 
     #message {
@@ -180,9 +184,9 @@
     requestAnimationFrame(loop);
 
     document.addEventListener('DOMContentLoaded', function () {
-            // Cambiar el nivel de zoom a 150%
-            document.body.style.zoom = "175%";
-        });
+      // Cambiar el nivel de zoom a 150%
+      document.body.style.zoom = "175%";
+    });
   </script>
 </body>
 

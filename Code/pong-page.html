@@ -142,7 +142,7 @@
 
         .game-container img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
         }
 
@@ -164,13 +164,52 @@
         .game-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 2em;
-            margin-bottom: 20px;
+        }
+
+        .game-description {
+            background-color: rgba(255, 255, 255, 0);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-size: 1.33em;
+        }
+
+        .instructions {
+            background-color: #20cbff;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            color: #2d007d;
+            font-weight: bold;
+        }
+
+        .keys-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        .keys-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .key {
+            background-color: #fff;
+            color: #ff66cc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            font-size: 1.5em;
         }
 
         .buttons-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 20px;
         }
 
         .play-button {
@@ -191,6 +230,25 @@
             background-color: #f96eb4;
         }
 
+        .back-button {
+            margin-top: 10px;
+            background-color: #2d007d;
+            border: none;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+            /* Alinea el botón a la izquierda */
+        }
+
+        .back-button:hover {
+            background-color: #3e1388;
+        }
+
         .review-container {
             flex: 1;
             background-color: #2c2c5400;
@@ -209,7 +267,6 @@
             /* Tamaño ajustado */
             margin-bottom: 10px;
             color: #fff;
-            text-shadow: 0 3px #181818;
         }
 
         .review-container textarea {
@@ -241,23 +298,6 @@
 
         .review-container button:hover {
             background-color: #f96eb4;
-        }
-
-        .back-button {
-            background-color: #2d007d;
-            border: none;
-            color: white;
-            padding: 0.5em 1em;
-            border-radius: 10px;
-            font-size: 0.8em;
-            cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .back-button:hover {
-            background-color: #3e1388;
         }
     </style>
 </head>
@@ -293,13 +333,23 @@
         <img src="images/banners/pong-banner.webp" alt="Pac-Man">
     </div>
     <div class="game-info">
+        <button class="back-button" onclick="location.href='home-page.html'"><i class="fas fa-arrow-left"></i> TORNAR A
+            L'INICI </button>
         <div class="game-details">
             <div class="game-title">PONG CLASSIC</div>
+            <div class="game-description">
+                <p>En aquest joc, controlaràs una paleta a la part superior o inferior de la pantalla i hauràs de
+                    rebotar una pilota cap a l'oponent per guanyar punts. Evita que la pilota passi més enllà de la teva
+                    paleta mentre intentes superar a l'oponent amb moviments ràpids i precissos. La partida acaba quan
+                    un jugador aconsegueix un nombre determinat de punts.</p>
+            </div>
+            <div class="instructions">
+                <p><i class="fas fa-info-circle"></i> El jugador de l'esquerra es mou cap amunt amb la tecla 'W' i cap
+                    abaix amb la tecla 'S', el jugador de la dreta s'ha de moure amb les fletxes de direcció.</p>
+            </div>
+
             <div class="buttons-container">
                 <button class="play-button" onclick="window.open('games/pong-game.html', '_blank')">JUGAR</button>
-                <button class="back-button" onclick="location.href='home-page.html'"> <i class="fas fa-arrow-left"></i>
-                    TORNAR A
-                    L'INICI </button>
             </div>
         </div>
         <div class="review-container">

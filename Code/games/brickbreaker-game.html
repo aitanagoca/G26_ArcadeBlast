@@ -13,7 +13,7 @@
     canvas {
       border: 2px solid white;
       background-color: white;
-      margin: 0 auto;
+      margin: 40px auto;
       display: block;
     }
 
@@ -21,7 +21,7 @@
       border-radius: 5px;
       font-size: 1.5em;
       display: block;
-      margin: 10 auto;
+      margin: -10px auto;
     }
   </style>
 </head>
@@ -895,6 +895,11 @@
     const gameManager = new GameManager();
 
     gameManager.run();
+
+    document.addEventListener('DOMContentLoaded', function () {
+            // Cambiar el nivel de zoom a 150%
+            document.body.style.zoom = "90%";
+        });
   </script>
 </body>
 

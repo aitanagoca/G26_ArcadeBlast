@@ -144,7 +144,6 @@
             width: 100%;
             height: auto;
             object-fit: cover;
-            margin-top: -600px;
         }
 
         .game-info {
@@ -165,14 +164,51 @@
         .game-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 2em;
-            margin-bottom: 20px;
+        }
+
+        .game-description {
+            background-color: rgba(255, 255, 255, 0);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-size: 1.33em;
+        }
+
+        .instructions {
+            background-color: #20cbff;
+            border-radius: 5px;
+            font-size: 1.2em;
+            color: #2d007d;
+            font-weight: bold;
+        }
+
+        .keys-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        .keys-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .key {
+            background-color: #fff;
+            color: #ff66cc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            font-size: 1.5em;
         }
 
         .buttons-container {
-            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 20px;
         }
 
         .play-button {
@@ -204,6 +240,8 @@
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
             transition: background-color 0.3s;
+            align-self: flex-start;
+            /* Alinea el botón a la izquierda */
         }
 
         .back-button:hover {
@@ -293,12 +331,25 @@
     <div class="game-container">
         <img src="images/banners/brickbreaker-banner.jpg" alt="Pac-Man">
     </div>
+
     <div class="game-info">
+        <button class="back-button" onclick="location.href='home-page.html'"><i class="fas fa-arrow-left"></i> TORNAR A
+            L'INICI </button>
         <div class="game-details">
             <div class="game-title">BRICK BREAKER</div>
+            <div class="game-description">
+                <p>Brick Breaker és un clàssic joc arcade en què has de destruir tots els blocs utilitzant una pilota
+                    que rebota en una paleta que pots moure amb el mouse. Evita que la pilota caigui fora de la pantalla
+                    per continuar jugant i guanyar punts.</p>
+            </div>
+            <div class="instructions">
+                <p><i class="fas fa-info-circle"></i> Mou la paleta amb el ratolí, fes clic per llançar la pilota i
+                    recollir-la amb un botó.</p>
+            </div>
+
             <div class="buttons-container">
-                <button class="play-button" onclick="window.open('games/brickbreaker-game.html', '_blank')">JUGAR</button>
-                <button class="back-button" onclick="location.href='home-page.html'"> <i class="fas fa-arrow-left"></i> TORNAR A L'INICI </button>
+                <button class="play-button"
+                    onclick="window.open('games/brickbreaker-game.html', '_blank')">JUGAR</button>
             </div>
         </div>
         <div class="review-container">

@@ -142,7 +142,7 @@
 
         .game-container img {
             width: 100%;
-            height: 100%;
+            height: auto;
             object-fit: cover;
         }
 
@@ -164,13 +164,52 @@
         .game-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 2em;
-            margin-bottom: 20px;
+        }
+
+        .game-description {
+            background-color: rgba(255, 255, 255, 0);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-size: 1.33em;
+        }
+
+        .instructions {
+            background-color: #20cbff;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            color: #2d007d;
+            font-weight: bold;
+        }
+
+        .keys-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        .keys-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .key {
+            background-color: #fff;
+            color: #ff66cc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            font-size: 1.5em;
         }
 
         .buttons-container {
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 20px;
         }
 
         .play-button {
@@ -191,6 +230,25 @@
             background-color: #f96eb4;
         }
 
+        .back-button {
+            margin-top: 10px;
+            background-color: #2d007d;
+            border: none;
+            color: white;
+            padding: 0.5em 1em;
+            border-radius: 10px;
+            font-size: 0.8em;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            transition: background-color 0.3s;
+            align-self: flex-start;
+            /* Alinea el botón a la izquierda */
+        }
+
+        .back-button:hover {
+            background-color: #3e1388;
+        }
+
         .review-container {
             flex: 1;
             background-color: #2c2c5400;
@@ -209,7 +267,6 @@
             /* Tamaño ajustado */
             margin-bottom: 10px;
             color: #fff;
-            text-shadow: 0 3px #181818;
         }
 
         .review-container textarea {
@@ -241,23 +298,6 @@
 
         .review-container button:hover {
             background-color: #f96eb4;
-        }
-
-        .back-button {
-            background-color: #2d007d;
-            border: none;
-            color: white;
-            padding: 0.5em 1em;
-            border-radius: 10px;
-            font-size: 0.8em;
-            cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            transition: background-color 0.3s;
-            margin-top: 10px;
-        }
-
-        .back-button:hover {
-            background-color: #3e1388;
         }
     </style>
 </head>
@@ -293,13 +333,22 @@
         <img src="images/banners/sudoku-banner.jpeg" alt="Pac-Man">
     </div>
     <div class="game-info">
+        <button class="back-button" onclick="location.href='home-page.html'"><i class="fas fa-arrow-left"></i> TORNAR A
+            L'INICI </button>
         <div class="game-details">
             <div class="game-title">SUDOKU</div>
+            <div class="game-description">
+                <p>El teu objectiu és omplir una graella de 9x9 amb nombres del 1 al 9, assegurant-te que no hi hagi cap
+                    nombre repetit en cap fila, columna o subgràfic de 3x3. Amb diversos nivells de dificultat i milers
+                    de combinacions úniques, el Sudoku ofereix un repte fascinant i una satisfacció immensa per a
+                    aquells que resolen els seus enigmes.</p>
+            </div>
+            <div class="instructions">
+                <p><i class="fas fa-info-circle"></i> Introdueix els números amb les tecles corresponents i valida/envia fent click al botó.</p>
+            </div>
+
             <div class="buttons-container">
                 <button class="play-button" onclick="window.open('games/sudoku-game.html', '_blank')">JUGAR</button>
-                <button class="back-button" onclick="location.href='home-page.html'"> <i class="fas fa-arrow-left"></i>
-                    TORNAR A
-                    L'INICI </button>
             </div>
         </div>
         <div class="review-container">

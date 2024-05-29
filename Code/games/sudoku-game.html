@@ -224,7 +224,7 @@
             </div>
           </div>
           <div class = " submit">
-                    <button id="submitButton" disabled type="button" onclick="check()"> Enviar </button>
+                    <button id="submitButton" disabled type="button" onclick="check()"> Validar/Enviar </button>
             </div>
         </div>
 
@@ -568,6 +568,10 @@
         }
     }
 
+    function showCongratulations() {
+        alert("Felicitats! Has completat el Sudoku correctament en " + document.getElementById("score"));
+    }
+
     function check() {
         var board = window.localStorage.getItem("solved");
         board = JSON.parse(board);
@@ -589,6 +593,7 @@
             }
         }
         if (wrongs == 0) {
+            showCongratulations();
             window.clearInterval(setTimer);
             document.getElementById("score").style.color = "green";
             document.getElementById("submitButton").setAttribute("disabled", "");
