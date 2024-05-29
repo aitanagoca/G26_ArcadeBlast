@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <title>Space Invaders - Arcade Blast</title>
+    <title>Maze - Arcade Blast</title>
     <link rel="icon" href="images/icons/arcadeblast_icon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -27,13 +27,19 @@
             justify-content: space-between;
         }
 
-        .header .menu-icon {
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-icon, .back-icon {
             font-size: 1.5em;
             cursor: pointer;
             z-index: 1100;
+            margin-right: 20px;
         }
 
-        .header .search-bar {
+        .search-bar {
             background: white;
             border: none;
             border-radius: 20px;
@@ -42,7 +48,7 @@
             font-size: 1em;
         }
 
-        .header .user-icon {
+        .user-icon {
             font-size: 1.5em;
             cursor: pointer;
             z-index: 1100;
@@ -144,6 +150,7 @@
             width: 100%;
             height: auto;
             object-fit: cover;
+            margin-top: -0px;
         }
 
         .game-info {
@@ -151,49 +158,49 @@
             justify-content: space-between;
             padding: 20px;
             background-color: #2d007d;
+            margin-left: 20px;
         }
 
         .game-details {
             flex: 1;
-            text-align: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
         }
 
         .game-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 2em;
+            text-align: center;
         }
 
         .game-description {
             background-color: rgba(255, 255, 255, 0);
-            padding: 10px;
             border-radius: 5px;
             text-align: center;
             color: white;
-            font-size: 1.33em;
+            font-size: 1.1em;
         }
 
         .instructions {
             background-color: #20cbff;
             padding: 5px;
             border-radius: 5px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: #2d007d;
             font-weight: bold;
+            text-align: center;
         }
 
         .keys-title {
             font-family: 'Press Start 2P', cursive;
             font-size: 1em;
-            margin-top: 20px;
         }
 
         .keys-container {
             display: flex;
             justify-content: center;
-            margin-top: 10px;
         }
 
         .key {
@@ -228,25 +235,6 @@
 
         .play-button:hover {
             background-color: #f96eb4;
-        }
-
-        .back-button {
-            margin-top: 10px;
-            background-color: #2d007d;
-            border: none;
-            color: white;
-            padding: 0.5em 1em;
-            border-radius: 10px;
-            font-size: 0.8em;
-            cursor: pointer;
-            font-family: 'Press Start 2P', cursive;
-            transition: background-color 0.3s;
-            align-self: flex-start;
-            /* Alinea el botón a la izquierda */
-        }
-
-        .back-button:hover {
-            background-color: #3e1388;
         }
 
         .review-container {
@@ -304,7 +292,10 @@
 
 <body>
     <div class="header">
-        <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+        <div class="header-left">
+            <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
+            <i class="fas fa-arrow-left back-icon" onclick="location.href='home-page.html'"></i>
+        </div>
         <input type="text" class="search-bar" placeholder="A què juguem?">
         <i class="fas fa-user user-icon" onclick="toggleUserPanel()"></i>
     </div>
@@ -315,8 +306,7 @@
             <li><a href="#"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
         </ul>
         <ul>
-            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols
-                    Contribuir?</a></li>
+            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols Contribuir?</a></li>
             <li><a href="#"><i class="fas fa-cogs"></i> Configuració</a></li>
         </ul>
     </div>
@@ -330,11 +320,9 @@
         </ul>
     </div>
     <div class="game-container">
-        <img src="images/banners/spaceinvaders-banner.webp" alt="Space Invaders">
+        <img src="images/banners/spaceinvaders-banner.webp" alt="Maze Game">
     </div>
     <div class="game-info">
-        <button class="back-button" onclick="location.href='home-page.html'"><i class="fas fa-arrow-left"></i> TORNAR A
-            L'INICI </button>
         <div class="game-details">
             <div class="game-title">SPACE INVADERS</div>
             <div class="game-description">
@@ -348,10 +336,9 @@
                 <p><i class="fas fa-info-circle"></i> Utilitza les tecles de direcció per moure't de dreta a esquerra i
                     clica l'espai per disparar.</p>
             </div>
-
+            
             <div class="buttons-container">
-                <button class="play-button"
-                    onclick="window.open('games/spaceinvaders-game.html', '_blank')">JUGAR</button>
+                <button class="play-button" onclick="window.open('games/spaceinvaders-game.html', '_blank')">JUGAR</button>
             </div>
         </div>
         <div class="review-container">
