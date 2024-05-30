@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
         body {
-            background-image: url('/Code/images/wallpapers/2134.png');
+            background-image: url('../images/wallpapers/2134.png');
             background-size: cover;            
         }
 
@@ -744,16 +744,13 @@
                 "blockSize": blockSize
             };
         };
-
         Pacman.Audio = function (game) {
-
             var files = [],
                 endEvents = [],
                 progressEvents = [],
                 playing = [];
 
             function load(name, path, cb) {
-
                 var f = files[name] = document.createElement("audio");
 
                 progressEvents[name] = function (event) { progress(event, name, cb); };
@@ -782,13 +779,12 @@
             };
 
             function ended(name) {
-
                 var i, tmp = [], found = false;
 
                 files[name].removeEventListener("ended", endEvents[name], true);
 
                 for (i = 0; i < playing.length; i++) {
-                    if (!found && playing[i]) {
+                    if (!found && playing[i] === name) {
                         found = true;
                     } else {
                         tmp.push(playing[i]);
@@ -797,11 +793,17 @@
                 playing = tmp;
             };
 
-            function play(name) {
+            function play(name, loop, callback) {
                 if (!game.soundDisabled()) {
-                    endEvents[name] = function () { ended(name); };
+                    endEvents[name] = function () { 
+                        ended(name); 
+                        if (typeof callback === "function") {
+                            callback();
+                        }
+                    };
                     playing.push(name);
                     files[name].addEventListener("ended", endEvents[name], true);
+                    files[name].loop = loop || false;
                     files[name].play();
                 }
             };
@@ -826,6 +828,7 @@
                 "resume": resume
             };
         };
+
 
         var PACMAN = (function () {
 
@@ -1115,12 +1118,14 @@
                 var extension = Modernizr.audio.ogg ? 'ogg' : 'mp3';
 
                 var audio_files = [
-                    ["start", root + "audio/opening_song." + extension],
-                    ["die", root + "audio/die." + extension],
-                    ["eatghost", root + "audio/eatghost." + extension],
-                    ["eatpill", root + "audio/eatpill." + extension],
-                    ["eating", root + "audio/eating.short." + extension],
-                    ["eating2", root + "audio/eating.short." + extension]
+                    ["start", "../sounds/pacman_opening.mp3"],
+                    ["die",  "../sounds/pacman-die.mp3" ],
+                    ["eatghost", "../sounds/pacman-eating-ghost.mp3" ],
+                    ["eatpill", "../sounds/pacman-eating-cherry.mp3" ],
+                    ["eating",  "../sounds/pacman-eating-cherry.mp3" ],
+                    ["eating2", "../sounds/pacman-eating-cherry.mp3" ],
+                    ["background", "../sounds/pacman-waka-waka.mp3" ],
+
                 ];
 
                 load(audio_files, function () { loaded(); });

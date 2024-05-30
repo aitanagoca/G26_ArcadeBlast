@@ -14,7 +14,7 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-image: url('/Code/images/wallpapers/2134.png'); /* URL de tu imagen */
+            background-image: url('../Code/images/wallpapers/2134.png'); /* URL de tu imagen */
             background-size: cover;
             color: #fff;
             overflow-x: hidden;
@@ -143,17 +143,15 @@
             height: 50vh;
             overflow: hidden;
             border: 10px solid #fa55a8;
-            /* Borde rosa */
             box-sizing: border-box;
         }
 
         .game-container img {
             width: 100%;
-            height: auto;
+            height: 100%;
             object-fit: cover;
-            margin-top: -100px;
+            margin-top: 0; /* Ajuste de margen */
         }
-
         .game-info {
             display: flex;
             justify-content: space-between;
@@ -320,7 +318,7 @@
         </ul>
     </div>
     <div class="game-container">
-        <img src="images/banners/pacman-banner.jpeg" alt="Brick Breaker">
+        <img src="images/banners/pacman-banner.jpg" alt="Brick Breaker">
     </div>
 
     <div class="game-info">
