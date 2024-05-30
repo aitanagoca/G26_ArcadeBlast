@@ -12,8 +12,9 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #2d007d;
-    }
+        background-image: url('/Code/images/wallpapers/2134.png'); /* URL de tu imagen */
+        background-size: cover;
+        }
 
     #gameContainer {
         max-width: 800px;
@@ -185,7 +186,7 @@
     }
 
     function drawEverything() {
-        colorRect(0, 0, canvas.width, canvas.height, 'black');
+        colorRect(0, 0, canvas.width, canvas.height, 'black'); 
 
         if (showingWinScreen) {
             canvasContext.fillStyle = 'white';
