@@ -19,6 +19,7 @@
             color: #fff;
             overflow-x: hidden;
         }
+        
 
         .header {
             background-color: #fa55a8;
@@ -285,6 +286,34 @@
         .review-container button:hover {
             background-color: #f96eb4;
         }
+
+        .down {
+            background-image: url('../Code/images/wallpapers/2.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center; 
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            height: 70px;
+            margin-top: 50px;
+            color: #f6f4f4; 
+        }
+
+        .footer-content {
+            text-align: center; /* Centra el texto dentro del footer */
+        }
+
+        .footer-content a {
+            color: #f6f4f4; /* Ajusta el color de los enlaces */
+            text-decoration: none;
+            margin: 0 5px; /* Espacio entre los enlaces */
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline; /* Subraya los enlaces al pasar el mouse por encima */
+        }
     </style>
 </head>
 
@@ -346,6 +375,17 @@
             <button type="submit">ENVIAR</button>
         </div>
     </div>
+    <div class="down">
+        <div class="footer-content">
+            <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
+            <p>
+                <a href="/privacy-policy">Política de privadesa</a> |
+                <a href="/terms-of-service">Termes de servei</a> |
+                <a href="/contact">Contacte</a>
+            </p>
+        </div>
+    </div>
+</body>
     <script>
         function toggleMenu() {
             document.getElementById('side-panel').classList.toggle('active');
