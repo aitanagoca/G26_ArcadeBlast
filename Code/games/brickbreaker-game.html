@@ -5,15 +5,14 @@
   <meta charset="utf-8" />
   <style>
     body {
-      background-image: url('/Code/images/wallpapers/2134.png');
-      background-size: cover;      
+      background: #1f0153;
       margin: 0;
       padding: 0;
     }
 
     canvas {
       border: 2px solid white;
-      background-color: url('/Code/images/wallpapers/2134.png');
+      background-color: white;
       margin: 40px auto;
       display: block;
     }
@@ -155,7 +154,7 @@
     canvas.width = width;
     canvas.height = height;
 
-    function line(x1, y1, x2, y2, color = "#fff") {
+    function line(x1, y1, x2, y2, color = "#000") {
       ctx.beginPath();
       ctx.strokeStyle = color;
       ctx.lineWidth = 2;
@@ -412,7 +411,7 @@
 
       display(state) {
         fillRect(this.x, this.y, this.w, this.h, this.color(state.level));
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "black";
         ctx.font = "20px Arial";
         ctx.fillText(
           this.n,

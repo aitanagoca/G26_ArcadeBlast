@@ -14,15 +14,15 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-image: url('../Code/images/wallpapers/2134.png');
+            background-image: url('../Code/images/wallpapers/2134.png'); /* URL de tu imagen */
             background-size: cover;
-            background-color: #2d007d;
+            background-color: #1f0153;
             color: #fff;
             overflow-x: hidden;
         }
-    
+
         .header {
-            background-color: #fa55a8;
+            background-color: #1f0153;
             padding: 10px;
             display: flex;
             align-items: center;
@@ -62,7 +62,7 @@
             left: 0;
             height: 100%;
             width: 250px;
-            background-color: rgba(255, 105, 180, 0.9);
+            background-color: #1f0153;
             padding: 20px;
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -103,7 +103,7 @@
             right: 0;
             height: 100%;
             width: 250px;
-            background-color: rgba(255, 105, 180, 0.9);
+            background-color: #1f0153;
             padding: 20px;
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
@@ -143,7 +143,8 @@
             width: 100%;
             height: 50vh;
             overflow: hidden;
-            border: 10px solid #fa55a8;
+            border: 10px solid #1f0153;
+            /* Borde rosa */
             box-sizing: border-box;
         }
 
@@ -151,13 +152,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            margin-top: 0; /* Ajuste de margen */
         }
-
 
         .game-info {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             padding: 20px;
             margin-left: 20px;
         }
@@ -167,7 +166,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 40px;
         }
 
         .game-title {
@@ -182,6 +181,7 @@
             text-align: center;
             color: white;
             font-size: 1.1em;
+            margin-top: 10px;
         }
 
         .instructions {
@@ -189,7 +189,7 @@
             padding: 5px;
             border-radius: 5px;
             font-size: 1.1em;
-            color: #2d007d;
+            color: #1f0153;
             font-weight: bold;
             text-align: center;
         }
@@ -206,7 +206,7 @@
 
         .key {
             background-color: #fff;
-            color: #ff66cc;
+            color: #1f0153;
             border-radius: 5px;
             padding: 5px 10px;
             margin: 0 5px;
@@ -221,7 +221,7 @@
         }
 
         .play-button {
-            background-color: #ff66cc;
+            background-color: #1f0153;
             color: #fff;
             border: none;
             padding: 1em 2em;
@@ -235,7 +235,7 @@
         }
 
         .play-button:hover {
-            background-color: #f96eb4;
+            background-color: #340585;
         }
 
         .review-container {
@@ -272,7 +272,7 @@
         }
 
         .review-container button {
-            background-color: #ff66cc;
+            background-color: #1f0153;
             color: #fff;
             border: none;
             padding: 1em 2em;
@@ -286,23 +286,26 @@
         }
 
         .review-container button:hover {
-            background-color: #f96eb4;
+            background-color: #340585;
         }
 
         .down {
-            background-image: url('../Code/images/wallpapers/2.png');
+            background-color: #1f0153;
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: center; 
+            background-position: center;
             padding: 10px;
             display: flex;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
             height: 70px;
-            margin-top: 50px;
-            color: #f6f4f4; 
+            color: #f6f4f4;
+            position: relative;
+            /* Cambio de 'fixed' a 'relative' */
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
         }
-
 
         .footer-content {
             text-align: center; /* Centra el texto dentro del footer */
@@ -375,8 +378,8 @@
         <div class="footer-content">
             <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
             <p>
-                <a href="/privacy-policy">Política de privadesa</a> |
-                <a href="/terms-of-service">Termes de servei</a> |
+                <a href="/privacy-policy">Política de Privacitat</a> |
+                <a href="/terms-of-service">Termes de Servei</a> |
                 <a href="/contact">Contacte</a>
             </p>
         </div>

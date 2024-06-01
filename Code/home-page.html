@@ -14,16 +14,15 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-image: url('../Code/images/wallpapers/2134.png'); 
-            background-size: cover; 
-            background-color: #2d007d;
+            background-image: url('../Code/images/wallpapers/2134.png');
+            background-size: cover;
+            background-color: #1f0153;
             color: #f6f4f4;
             overflow-x: hidden;
         }
 
         .header {
-            background-image: url('../Code/images/wallpapers/2.png');
-            background-color: #fa55a8;
+            background-color: #1f0153;
             padding: 10px;
             display: flex;
             align-items: center;
@@ -31,31 +30,39 @@
         }
 
         .down {
-            background-image: url('../Code/images/wallpapers/2.png');
+            background-color: #1f0153;
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: center; 
+            background-position: center;
             padding: 10px;
             display: flex;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
             height: 70px;
-            margin-top: 50px;
-            color: #f6f4f4; 
+            color: #f6f4f4;
+            position: relative;
+            /* Cambio de 'fixed' a 'relative' */
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
         }
 
         .footer-content {
-            text-align: center; /* Centra el texto dentro del footer */
+            text-align: center;
+            /* Centra el texto dentro del footer */
         }
 
         .footer-content a {
-            color: #f6f4f4; /* Ajusta el color de los enlaces */
+            color: #f6f4f4;
+            /* Ajusta el color de los enlaces */
             text-decoration: none;
-            margin: 0 5px; /* Espacio entre los enlaces */
+            margin: 0 5px;
+            /* Espacio entre los enlaces */
         }
 
         .footer-content a:hover {
-            text-decoration: underline; /* Subraya los enlaces al pasar el mouse por encima */
+            text-decoration: underline;
+            /* Subraya los enlaces al pasar el mouse por encima */
         }
 
         .header .menu-icon {
@@ -85,7 +92,7 @@
             left: 0;
             height: 100%;
             width: 250px;
-            background-color: rgba(255, 105, 180, 0.9);
+            background-color: #1f0153;
             padding: 20px;
             transform: translateX(-100%);
             transition: transform 0.3s ease-in-out;
@@ -126,7 +133,7 @@
             right: 0;
             height: 100%;
             width: 250px;
-            background-color: rgba(255, 105, 180, 0.9);
+            background-color: #1f0153;
             padding: 20px;
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
@@ -211,18 +218,22 @@
         }
 
         @keyframes neon {
-        0% {
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            0% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
         }
-        50% {
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
-        }
-        100% {
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-        }
-        }
+
         .game-card {
-            background-color: rgb(29, 33, 38); /* Cambia el color de fondo de la tarjeta según tu preferencia */
+            background-color: rgb(29, 33, 38);
+            /* Cambia el color de fondo de la tarjeta según tu preferencia */
             border-radius: 10px;
             overflow: hidden;
             text-align: center;
@@ -231,8 +242,9 @@
             height: 300px;
 
             margin-top: 50px;
-            animation: neon 2s linear infinite; /* Aplica la animación al efecto de brillo neón */
-            
+            animation: neon 2s linear infinite;
+            /* Aplica la animación al efecto de brillo neón */
+
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -248,7 +260,7 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
             animation: lightning 2s linear infinite;
-        }  
+        }
 
         .game-card:hover {
             transform: scale(1.05);
@@ -258,7 +270,7 @@
             width: 100%;
             height: 80%;
             object-fit: cover;
-        } 
+        }
 
         .game-card h3 {
             font-size: 1.5em;
@@ -318,7 +330,9 @@
         </div>
         <div class="games-grid">
             <div class="game-card" data-category="accio" onclick="location.href='brickbreaker-page.html'">
-                <img src="images/covers/brickBreakerCover.webp" alt="Brick Breaker">
+                <div class="cover-image">
+                    <img src="images/covers/brickBreakerCover.webp" alt="Maze">
+                </div>
                 <h3>Brick Breaker</h3>
             </div>
             <div class="game-card" data-category="aventura" onclick="location.href='maze-page.html'">
@@ -328,46 +342,59 @@
                 <h3>Maze</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='pacman-page.html'">
-                <img src="images/covers/pacManPortada.jpg" alt="Pac-Man">
+                <div class="cover-image">
+                    <img src="images/covers/pacManPortada.jpg" alt="Maze">
+                </div>
                 <h3>Pac-Man</h3>
             </div>
             <div class="game-card" data-category="esportiu" onclick="location.href='pong-page.html'">
-                <img src="images/covers/pongCover.webp" alt="Pong Classic">
+                <div class="cover-image">
+                    <img src="images/covers/pongCover.webp" alt="Maze">
+                </div>
                 <h3>Pong Classic</h3>
             </div>
             <div class="game-card" data-category="estrategia" onclick="location.href='snake-page.html'">
-                <img src="images/covers/snakeCover.webp" alt="Snake">
+                <div class="cover-image">
+                    <img src="images/covers/snakeCover.webp" alt="Maze">
+                </div>
                 <h3>Snake</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='spaceinvaders-page.html'">
-                <img src="images/covers/spaceInvadersCover.webp" alt="Space Invaders">
+                <div class="cover-image">
+                    <img src="images/covers/spaceInvadersCover.webp" alt="Maze">
+                </div>
                 <h3>Space Invaders</h3>
             </div>
             <div class="game-card" data-category="estrategia" onclick="location.href='sudoku-page.html'">
-                <img src="images/covers/sudokuCover.webp" alt="Sudoku">
+                <div class="cover-image">
+                    <img src="images/covers/sudokuCover.webp" alt="Maze">
+                </div>
                 <h3>Sudoku</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='tetris-page.html'">
-                <img src="images/covers/tetrisCover.webp" alt="Tetris">
+                <div class="cover-image">
+                    <img src="images/covers/tetrisCover.webp" alt="Maze">
+                </div>
                 <h3>Tetris</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='tugwar-page.html'">
-                <img src="images/covers/tugWarCover.webp" alt="Tug of War">
+                <div class="cover-image">
+                    <img src="images/covers/tugWarCover.webp" alt="Maze">
+                </div>
                 <h3>Tug War</h3>
             </div>
         </div>
     </div>
     <div class="down">
         <div class="footer-content">
-            <p>&copy; 2024 ArcadeBlast. Todos los derechos reservados.</p>
+            <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
             <p>
-                <a href="/privacy-policy">Política de Privacidad</a> |
-                <a href="/terms-of-service">Términos de Servicio</a> |
-                <a href="/contact">Contacto</a>
+                <a href="/privacy-policy">Política de Privacitat</a> |
+                <a href="/terms-of-service">Termes de Servei</a> |
+                <a href="/contact">Contacte</a>
             </p>
         </div>
     </div>
-    
 
     <script>
         function toggleMenu() {
