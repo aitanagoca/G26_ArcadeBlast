@@ -6,14 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Arcade Blast - Contribuir</title>
-    <link rel="icon" href="/images/icons/arcadeblast_icon.png" type="image/png">
+    <link rel="icon" href="images/icons/arcadeblast_icon.png" type="image/png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
         body {
-            background-image: url('../Code/images/wallpapers/2134.png'); 
-            background-size: cover;
+            background-image: url('../Code/images/wallpapers/2134.png');
             font-family: 'Roboto', sans-serif;
             color: #fff;
             margin: 0;
@@ -26,9 +25,6 @@
 
         .container {
             text-align: center;
-            flex: 1; /* Ajusta el nuevo contenedor para llenar el espacio disponible */
-            display: flex;
-            flex-direction: column;
         }
 
         .header {
@@ -54,7 +50,6 @@
             padding-right: 50px;
             padding-left: 50px;
             border-radius: 10px;
-            margin-top: 50px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
@@ -137,35 +132,35 @@
             background-color: #555;
         }
 
-        .down {
-            background-image: url('../Code/images/wallpapers/2.png');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center; 
-            padding: 10px;
-            position: fixed; /* Fija el elemento en la parte inferior */
-            bottom: 0; /* Lo coloca en la parte inferior */
-            left: 0;
-            width: 100%; /* Ocupa todo el ancho */
-            height: 70px;
-            color: #f6f4f4; 
-        }
-
-
         .footer-content {
-            text-align: center; /* Centra el texto dentro del footer */
+            text-align: center;
         }
 
         .footer-content a {
-            color: #f6f4f4; /* Ajusta el color de los enlaces */
+            color: #f6f4f4;
             text-decoration: none;
-            margin: 0 5px; /* Espacio entre los enlaces */
+            margin: 0 5px;
         }
 
         .footer-content a:hover {
-            text-decoration: underline; /* Subraya los enlaces al pasar el mouse por encima */
+            text-decoration: underline;
         }
 
+        .down {
+            background-color: #1f0153;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            color: #f6f4f4;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -184,13 +179,47 @@
         </div>
         <button class="back-button" id="back-btn">Tornar enrere</button>
     </div>
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function (event) {
+            const fileName = event.target.files[0] ? event.target.files[0].name : '';
+            const fileNameDisplay = document.getElementById('file-name');
+            fileNameDisplay.textContent = fileName ? `🗸 ${fileName}` : '';
+        });
+
+        document.getElementById('submit-btn').addEventListener('click', function () {
+            if (confirm('Segur que vols enviar la proposta?')) {
+                const form = document.querySelector('.form');
+                const title = document.getElementById('form-title');
+                title.textContent = 'Proposta enviada!';
+
+                const textarea = document.getElementById('proposal-textarea');
+                textarea.style.display = 'none';
+
+                const fileLabel = document.querySelector('.file-label');
+                fileLabel.style.display = 'none';
+
+                const fileNameDisplay = document.getElementById('file-name');
+                fileNameDisplay.style.display = 'none';
+
+                const submitButton = document.getElementById('submit-btn');
+                submitButton.style.display = 'none';
+
+                const backButton = document.getElementById('back-btn');
+                backButton.textContent = "Tornar a la pàgina d'inici";
+            }
+        });
+
+        document.getElementById('back-btn').addEventListener('click', function () {
+            window.location.href = 'home-page.html'; // Cambia esto a la URL correcta
+        });
+    </script>
     <div class="down">
         <div class="footer-content">
             <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
             <p>
-                <a href="/privacy-policy">Política de privadesa</a> |
-                <a href="/terms-of-service">Termes de servei</a> |
-                <a href="/contact">Contacte</a>
+                <a onclick="location.href='privacy-policy.html'">Política de Privacitat</a> |
+                <a onclick="location.href='terms-of-service.html'">Termes de Servei</a> |
+                <a onclick="location.href='contact.html'">Contacte</a>
             </p>
         </div>
     </div>

@@ -14,7 +14,8 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            background-image: url('../Code/images/wallpapers/2134.png'); /* URL de tu imagen */
+            background-image: url('../Code/images/wallpapers/2134.png');
+            /* URL de tu imagen */
             background-size: cover;
             background-color: #1f0153;
             color: #fff;
@@ -34,7 +35,8 @@
             align-items: center;
         }
 
-        .menu-icon, .back-icon {
+        .menu-icon,
+        .back-icon {
             font-size: 1.5em;
             cursor: pointer;
             z-index: 1100;
@@ -166,7 +168,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 40px;
         }
 
         .game-title {
@@ -221,7 +223,7 @@
         }
 
         .play-button {
-            background-color: #1f0153;
+            background-color: #ff66cc;
             color: #fff;
             border: none;
             padding: 1em 2em;
@@ -235,7 +237,7 @@
         }
 
         .play-button:hover {
-            background-color: #340585;
+            background-color: #f96eb4;
         }
 
         .review-container {
@@ -272,7 +274,7 @@
         }
 
         .review-container button {
-            background-color: #1f0153;
+            background-color: #ff66cc;
             color: #fff;
             border: none;
             padding: 1em 2em;
@@ -286,7 +288,7 @@
         }
 
         .review-container button:hover {
-            background-color: #340585;
+            background-color: #f96eb4;
         }
 
         .down {
@@ -308,17 +310,21 @@
         }
 
         .footer-content {
-            text-align: center; /* Centra el texto dentro del footer */
+            text-align: center;
+            /* Centra el texto dentro del footer */
         }
 
         .footer-content a {
-            color: #f6f4f4; /* Ajusta el color de los enlaces */
+            color: #f6f4f4;
+            /* Ajusta el color de los enlaces */
             text-decoration: none;
-            margin: 0 5px; /* Espacio entre los enlaces */
+            margin: 0 5px;
+            /* Espacio entre los enlaces */
         }
 
         .footer-content a:hover {
-            text-decoration: underline; /* Subraya los enlaces al pasar el mouse por encima */
+            text-decoration: underline;
+            /* Subraya los enlaces al pasar el mouse por encima */
         }
     </style>
 </head>
@@ -339,7 +345,8 @@
             <li><a href="#"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
         </ul>
         <ul>
-            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols Contribuir?</a></li>
+            <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols
+                    Contribuir?</a></li>
             <li><a href="#"><i class="fas fa-cogs"></i> Configuració</a></li>
         </ul>
     </div>
@@ -371,8 +378,7 @@
             </div>
 
             <div class="buttons-container">
-                <button class="play-button"
-                    onclick="window.open('games/snake-game.html', '_blank')">JUGAR</button>
+                <button class="play-button" onclick="window.open('games/snake-game.html', '_blank')">JUGAR</button>
             </div>
         </div>
         <div class="review-container">
@@ -401,9 +407,9 @@
         <div class="footer-content">
             <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
             <p>
-                <a href="/privacy-policy">Política de Privacitat</a> |
-                <a href="/terms-of-service">Termes de Servei</a> |
-                <a href="/contact">Contacte</a>
+                <a onclick="location.href='privacy-policy.html'">Política de Privacitat</a> |
+                <a onclick="location.href='terms-of-service.html'">Termes de Servei</a> |
+                <a onclick="location.href='contact.html'">Contacte</a>
             </p>
         </div>
     </div>

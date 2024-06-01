@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     /* Import Google font - Poppins */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -30,7 +31,12 @@
     }
 
     .wrapper {
-      width: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Cambia esto a center */
+      width: 1200px;
+      /* Ajusta el ancho según sea necesario */
       background: #fff9f9;
       border-radius: 10px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
@@ -75,6 +81,23 @@
 
     .calendar {
       padding: 20px;
+      max-width: 50%;
+    }
+
+    .event-box {
+      flex: 1;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-sizing: border-box;
+      background-color: #fff9f9;
+      width: 90% !important;
+      /* Ajusta el ancho máximo según sea necesario */
+      margin: 0 20px;
+    }
+
+    .calendar {
+      max-width: 100%;
     }
 
     .calendar ul {
@@ -124,7 +147,6 @@
       z-index: -1;
       border-radius: 50%;
       transform: translate(-50%, -50%);
-
     }
 
     .days li.active::before {
@@ -137,63 +159,65 @@
 
     .days li.event::before {
       background: #2ecc71;
-      /* Cambia esto al color que prefieras para los eventos */
     }
 
-    .event-box {
-      flex: 1;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-sizing: border-box;
-      /* Asegura que el padding y el borde no aumenten el tamaño de las cajas */
+    .footer-content {
+      text-align: center;
     }
 
-    .calendar {
-      max-width: 100%;
-      /* Ajusta esto según tus necesidades */
+    .footer-content a {
+      color: #f6f4f4;
+      text-decoration: none;
+      margin: 0 5px;
     }
 
-    .event-box {
-      max-width: 25%;
-      /* Ajusta esto según tus necesidades */
-      margin: 0 20px;
-      /* Añade un margen a los lados de la caja de eventos */
-      background-color: #fff9f9;
+    .footer-content a:hover {
+      text-decoration: underline;
     }
 
-    .days li.event::before {
-      background: #2ecc71;
-      /* Cambia esto al color que prefieras para los eventos */
-    }
-
-    .wrapper header {
+    .down {
+      background-color: #1f0153;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      padding: 10px;
       display: flex;
       align-items: center;
-      padding: 25px 30px 10px;
-      justify-content: space-between;
+      justify-content: center;
+      height: 70px;
+      color: #f6f4f4;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
 
-    header .icons {
+    .back-icon {
+      font-size: 1.5em;
+      cursor: pointer;
+      z-index: 1100;
+      margin-right: 20px;
       display: flex;
-      justify-content: flex-start;
-      /* Alinea los iconos a la derecha */
-      flex: 1;
-      /* Ocupa todo el espacio disponible */
+      align-items: center;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
     }
   </style>
 </head>
 
 <body>
+  <i class="fas fa-arrow-left back-icon" onclick="location.href='home-page.html'"></i>
   <div class="wrapper">
-    <header>
-      <p class="current-date"></p>
-      <div class="icons">
-        <span id="prev" class="material-symbols-rounded">chevron_left</span>
-        <span id="next" class="material-symbols-rounded">chevron_right</span>
-      </div>
-    </header>
     <div class="calendar">
+      <header>
+        <p class="current-date"></p>
+        <div class="icons">
+          <span id="prev" class="material-symbols-rounded">chevron_left</span>
+          <span id="next" class="material-symbols-rounded">chevron_right</span>
+        </div>
+      </header>
       <ul class="weeks">
         <li>Dill</li>
         <li>Dim</li>
@@ -205,9 +229,19 @@
       </ul>
       <ul class="days"></ul>
     </div>
+    <div class="event-box">
+      asdfasdf
+    </div>
   </div>
-  <div class="event-box">
-    asdfasdf
+  <div class="down">
+    <div class="footer-content">
+      <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
+      <p>
+        <a onclick="location.href='privacy-policy.html'">Política de Privacitat</a> |
+        <a onclick="location.href='terms-of-service.html'">Termes de Servei</a> |
+        <a onclick="location.href='contact.html'">Contacte</a>
+      </p>
+    </div>
   </div>
   <script>
     // Array of events

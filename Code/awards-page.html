@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merits</title>
+    <title>Mèrits</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
         body {
-            background-image: url('../Code/images/wallpapers/2134.png'); 
-            background-size: cover; 
+            background-image: url('../Code/images/wallpapers/2134.png');
+            background-size: cover;
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            margin: 0;
         }
-        h1 {
+
+        .header {
+            font-size: 24px;
             text-align: center;
-            color: #f0f0f0;
+            margin-top: 50px;
+            /* Ajusta este valor según lo necesites */
         }
+
+        /* Agrega este nuevo estilo para el espacio adicional */
+        .header h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2em;
+            text-shadow: 0 5px #181818;
+            color: white;
+            margin-top: 50px;
+            /* Puedes ajustar este valor según sea necesario */
+        }
+
         .achievements-container {
             display: flex;
             flex-wrap: wrap;
@@ -29,68 +47,93 @@
         }
 
         .game {
-            background-color: none;
+            background-color: #1f0153;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
             padding: 20px;
-            margin-top: 100px;
+            margin-top: 40px;
             width: 100%;
         }
 
         .game h2 {
-            color: #f0f0f0;
+            font-family: 'Press Start 2P', cursive;
+            text-align: center;
+            color: white;
+            text-shadow: 0 4px #181818;
             margin-top: 0;
         }
-        
+
         .achievements-list {
             list-style: none;
             padding: 0;
         }
+
         .achievements-list li {
-            background-color: #333;
+            background-color: white;
             border: 1px solid #242222;
             border-radius: 5px;
             margin: 10px 0;
             padding: 10px;
-            color: #f0f0f0;
+            color: black;
         }
+
         .down {
-            background-image: url('../Code/images/wallpapers/2.png');
+            background-color: #1f0153;
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: center; 
+            background-position: center;
             padding: 10px;
             display: flex;
             align-items: center;
-            justify-content: center; 
+            justify-content: center;
             height: 70px;
             margin-top: 50px;
-            color: #f6f4f4; 
+            color: #f6f4f4;
         }
 
         .footer-content {
-            text-align: center; /* Centra el texto dentro del footer */
+            text-align: center;
+            /* Centra el texto dentro del footer */
         }
 
         .footer-content a {
-            color: #f6f4f4; /* Ajusta el color de los enlaces */
+            color: #f6f4f4;
+            /* Ajusta el color de los enlaces */
             text-decoration: none;
-            margin: 0 5px; /* Espacio entre los enlaces */
+            margin: 0 5px;
+            /* Espacio entre los enlaces */
         }
 
         .footer-content a:hover {
-            text-decoration: underline; /* Subraya los enlaces al pasar el mouse por encima */
+            text-decoration: underline;
+            /* Subraya los enlaces al pasar el mouse por encima */
         }
 
+        .back-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            z-index: 1100;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
     </style>
 </head>
-<body>
 
-    <h1>Logros del Joc</h1>
+<body>
+    <i class="fas fa-arrow-left back-icon" onclick="location.href='home-page.html'"></i>
+    <div class="header">
+        <h1>Mèrits dels Jocs</h1>
+    </div>
     <div class="achievements-container">
         <div class="column">
             <div class="game">
-                <h2>Logros de SPACE INVADERS</h2>
+                <h2>SPACE INVADERS</h2>
                 <ul class="achievements-list">
                     <li>Destruir 10 naus en 30 segons</li>
                     <li>Arribar al nivell 5</li>
@@ -100,7 +143,7 @@
                 </ul>
             </div>
             <div class="game">
-                <h2>Logros de PAC-MAN</h2>
+                <h2>PAC-MAN</h2>
                 <ul class="achievements-list">
                     <li>Menjar tots els fantasmes en un nivell</li>
                     <li>Arribar al nivell 10</li>
@@ -112,7 +155,7 @@
         </div>
         <div class="column">
             <div class="game">
-                <h2>Logros de TETRIS</h2>
+                <h2>TETRIS</h2>
                 <ul class="achievements-list">
                     <li>Eliminar 4 línies d'un cop (Tetris)</li>
                     <li>Arribar al nivell 20</li>
@@ -122,7 +165,7 @@
                 </ul>
             </div>
             <div class="game">
-                <h2>Logros de PONG</h2>
+                <h2>PONG</h2>
                 <ul class="achievements-list">
                     <li>Guanyar un partit 10-0</li>
                     <li>Marcar 5 punts seguits</li>
@@ -135,14 +178,15 @@
     </div>
     <div class="down">
         <div class="footer-content">
-            <p>&copy; 2024 ArcadeBlast. Todos los derechos reservados.</p>
+            <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
             <p>
-                <a href="/privacy-policy">Política de Privacidad</a> |
-                <a href="/terms-of-service">Términos de Servicio</a> |
-                <a href="/contact">Contacto</a>
+                <a onclick="location.href='privacy-policy.html'">Política de Privacitat</a> |
+                <a onclick="location.href='terms-of-service.html'">Termes de Servei</a> |
+                <a onclick="location.href='contact.html'">Contacte</a>
             </p>
         </div>
     </div>
-    
+
 </body>
+
 </html>
