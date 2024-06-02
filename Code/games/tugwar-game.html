@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joc de Tirar la Corda</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #2D007D;
+            margin: 0;
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+            background-image: linear-gradient(45deg, #2D007D 25%, #1B004F 75%);
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        #title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px #000;
+            position: absolute;
+            top: 10%;
+        }
+
+        #game-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1000px;
+            background-color: #1B004F;
+            border: 4px solid #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .player {
+            width: 200px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffcc00;
+            transition: transform 0.3s;
+        }
+
+        .player img {
+            width: 100px;
+            transition: transform 0.05s;
+        }
+
+        #rope-container {
+            flex-grow: 1;
+            height: 20px;
+            background-color: #eee;
+            position: relative;
+            margin: 0 20px;
+            border: 2px dashed #ffcc00;
+        }
+
+        #rope {
+            width: 20px;
+            height: 20px;
+            background-color: #ffcc00;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: left 0.05s, background-color 0.1s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #winner-message {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            color: #ffcc00;
+            text-shadow: 2px 2px #000;
+        }
+
+        #score-container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1000px;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        #replay-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .highlight-left {
+            background-color: #ffdddd;
+        }
+
+        .highlight-right {
+            background-color: #ddffdd;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="title">Tug War</div>
+    <div id="score-container">
+        <div id="player1-score" class="score">Puntuació Jugador 1: 0</div>
+        <div id="player2-score" class="score">Puntuació Jugador 2: 0</div>
+    </div>
+    <div id="game-container">
+        <div id="player1" class="player">
+            Jugador 1 (Prem A o S)
+            <img src="../images/others/tugwarPlayer1.png" alt="Jugador 1">
+        </div>
+        <div id="rope-container">
+            <div id="rope"></div>
+        </div>
+        <div id="player2" class="player">
+            Jugador 2 (Prem L o K)
+            <img src="../images/others/tugwarPlayer2.png" alt="Jugador 2">
+        </div>
+    </div>
+    <div id="winner-message"></div>
+    <button id="replay-button">Tornar a Jugar</button>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const rope = document.getElementById('rope');
+            const winnerMessage = document.getElementById('winner-message');
+            const player1ScoreElement = document.getElementById('player1-score');
+            const player2ScoreElement = document.getElementById('player2-score');
+            const replayButton = document.getElementById('replay-button');
+            const gameContainer = document.getElementById('game-container');
+            const player1 = document.getElementById('player1');
+            const player2 = document.getElementById('player2');
+            let ropePosition = 50; // Percentatge (50% és el centre)
+            let player1Score = 0;
+            let player2Score = 0;
+            const moveAmount = 3; // Increase the move amount for faster movement
+            let keysPressed = {};
+
+            const updateScores = () => {
+                player1ScoreElement.textContent = `Puntuació Jugador 1: ${player1Score}`;
+                player2ScoreElement.textContent = `Puntuació Jugador 2: ${player2Score}`;
+            };
+
+            const updateRopeColor = () => {
+                const percentFromCenter = Math.abs(50 - ropePosition);
+                const colorIntensity = Math.min(255, Math.floor(percentFromCenter * 5.1));
+                let color;
+                if (ropePosition < 50) {
+                    color = `rgb(255, ${255 - colorIntensity}, ${255 - colorIntensity})`; // Redder as it moves left
+                } else {
+                    color = `rgb(${255 - colorIntensity}, ${255 - colorIntensity}, 255)`; // Bluer as it moves right
+                }
+                rope.style.backgroundColor = color;
+            };
+
+            const moveRope = (direction) => {
+                if (direction === 'left') {
+                    ropePosition -= moveAmount;
+                    player1.style.transform = `translateX(${-(50 - ropePosition)}%)`;
+                    player2.style.transform = `translateX(${-(50 - ropePosition)}%)`;
+                    player1.classList.add('shake');
+                    setTimeout(() => player1.classList.remove('shake'), 300);
+                } else if (direction === 'right') {
+                    ropePosition += moveAmount;
+                    player1.style.transform = `translateX(${-(50 - ropePosition)}%)`;
+                    player2.style.transform = `translateX(${-(50 - ropePosition)}%)`;
+                    player2.classList.add('shake');
+                    setTimeout(() => player2.classList.remove('shake'), 300);
+                }
+
+                rope.style.left = `${ropePosition}%`;
+                updateRopeColor();
+
+                // Afegir efectes visuals quan un jugador està a punt de guanyar
+                if (ropePosition <= 10) {
+                    gameContainer.classList.add('highlight-left');
+                    gameContainer.classList.remove('highlight-right');
+                } else if (ropePosition >= 90) {
+                    gameContainer.classList.add('highlight-right');
+                    gameContainer.classList.remove('highlight-left');
+                } else {
+                    gameContainer.classList.remove('highlight-left', 'highlight-right');
+                }
+
+                if (ropePosition <= 0) {
+                    player1Score += 1;
+                    winnerMessage.textContent = 'Jugador 1 guanya!';
+                    updateScores();
+                    endGame();
+                } else if (ropePosition >= 100) {
+                    player2Score += 1;
+                    winnerMessage.textContent = 'Jugador 2 guanya!';
+                    updateScores();
+                    endGame();
+                }
+            };
+
+            const handleKeyPress = (event) => {
+                if (keysPressed[event.key]) {
+                    return; // Ignore repeated key presses
+                }
+                keysPressed[event.key] = true;
+
+                if (event.key === 'a' || event.key === 'A' || event.key === 's' || event.key === 'S') {
+                    moveRope('left');
+                } else if (event.key === 'l' || event.key === 'L' || event.key === 'k' || event.key === 'K') {
+                    moveRope('right');
+                }
+            };
+
+            const handleKeyRelease = (event) => {
+                keysPressed[event.key] = false;
+            };
+
+            const endGame = () => {
+                document.removeEventListener('keydown', handleKeyPress);
+                document.removeEventListener('keyup', handleKeyRelease);
+                replayButton.style.display = 'block';
+            };
+
+            const resetGame = () => {
+                ropePosition = 50;
+                rope.style.left = `${ropePosition}%`;
+                updateRopeColor();
+                winnerMessage.textContent = '';
+                replayButton.style.display = 'none';
+                gameContainer.classList.remove('highlight-left', 'highlight-right');
+                player1.style.transform = 'translateX(0)';
+                player2.style.transform = 'translateX(0)';
+                document.addEventListener('keydown', handleKeyPress);
+                document.addEventListener('keyup', handleKeyRelease);
+            };
+
+            replayButton.addEventListener('click', resetGame);
+
+            document.addEventListener('keydown', handleKeyPress);
+            document.addEventListener('keyup', handleKeyRelease);
+            updateRopeColor(); // Set initial color
+        });
+    </script>
+</body>
+</html>
