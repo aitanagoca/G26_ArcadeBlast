@@ -150,13 +150,32 @@
             <label for="remember">Recordar contrasenya</label>
         </div>
         <button class="login-button" id="login-btn">Entrar</button>
-        <div class="google-button">
+        <div class="google-button" id="google-login-btn">
             <img src="images/icons/google_icon.webp" alt="Google Icon">
             Iniciar sessió amb Google
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBorKfyhu643HNOFAdPr_jSsrmDgG7ig1I",
+            authDomain: "arcadeblast-c28e9.firebaseapp.com",
+            projectId: "arcadeblast-c28e9",
+            storageBucket: "arcadeblast-c28e9.appspot.com",
+            messagingSenderId: "195192005739",
+            appId: "1:195192005739:web:01b1c129085ea47acd7d2e",
+            measurementId: "G-N4LLYWXM3Q"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
         document.querySelectorAll('.show-password').forEach(item => {
             item.addEventListener('click', event => {
                 let input = event.target.previousElementSibling;
@@ -172,7 +191,7 @@
             });
         });
 
-        document.getElementById('login-btn').addEventListener('click', function (event) {
+        document.getElementById('login-btn').addEventListener('click', function(event) {
             event.preventDefault(); // Prevent default form submission
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -187,10 +206,43 @@
                 return;
             }
 
-            // Add actual login logic here (e.g., API call)
+            signInWithEmailAndPassword(auth, username, password)
+                .then((userCredential) => {
+                    // Signed in
+                    const user = userCredential.user;
+                    alert('Iniciant sessió...');
+                    // Optionally, redirect to home.html
+                    window.location.href = 'home-page.html';
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage);
+                });
+        });
 
-            // If login is successful, redirect to home.html
-            window.location.href = 'home-page.html';
+        document.getElementById('google-login-btn').addEventListener('click', function(event) {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    const credential = GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential.accessToken;
+                    // The signed-in user info.
+                    const user = result.user;
+                    alert('Iniciant sessió amb Google...');
+                    // Optionally, redirect to home.html
+                    window.location.href = 'home-page.html';
+                }).catch((error) => {
+                    // Handle Errors here.
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    const credential = GoogleAuthProvider.credentialFromError(error);
+                    alert(errorMessage);
+                });
         });
     </script>
 

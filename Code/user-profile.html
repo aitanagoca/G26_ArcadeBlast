@@ -31,31 +31,24 @@
             background-position: center;
             padding: 10px;
             position: fixed;
-            /* Fija el elemento en la parte inferior */
             bottom: 0;
-            /* Lo coloca en la parte inferior */
             left: 0;
             width: 100%;
-            /* Ocupa todo el ancho */
             height: 70px;
         }
 
         .footer-content {
             text-align: center;
-            /* Centra el texto dentro del footer */
         }
 
         .footer-content a {
             color: #f6f4f4;
-            /* Ajusta el color de los enlaces */
             text-decoration: none;
             margin: 0 5px;
-            /* Espacio entre los enlaces */
         }
 
         .footer-content a:hover {
             text-decoration: underline;
-            /* Subraya los enlaces al pasar el mouse por encima */
         }
 
         .title {
@@ -112,6 +105,7 @@
         #display-username {
             font-size: 1.4em;
             font-weight: bold;
+            color: #666;
         }
 
         #display-email {
@@ -161,6 +155,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px;
+            position: relative;
         }
 
         .edit-form .form-field input {
@@ -169,6 +164,13 @@
             flex: 1;
             padding: 5px 10px;
             font-size: 1em;
+        }
+
+        .form-field i.show-password {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+            color: #888;
         }
 
         .badge {
@@ -182,7 +184,6 @@
             font-size: 0.9em;
             font-weight: bold;
             display: none;
-            /* Initially hidden */
         }
     </style>
 </head>
@@ -207,20 +208,41 @@
         <div class="edit-form" id="edit-form">
             <div class="form-field">
                 <i class="fa fa-user"></i>
-                <input type="text" id="edit-username" placeholder="Nom d’usuari" value="Nom d’usuari">
+                <input type="text" id="edit-username" placeholder="Nom d’usuari" value="">
+                <button class="save-button" id="save-username-btn">Desa el nom d’usuari</button>
             </div>
             <div class="form-field">
-                <i class="fa fa-envelope"></i>
-                <input type="email" id="edit-email" placeholder="Correu electrònic" value="correu@example.com">
+                <i class="fa fa-lock"></i>
+                <input type="password" id="edit-password" placeholder="Nova contrasenya">
+                <i class="fa fa-eye show-password"></i>
+                <button class="save-button" id="save-password-btn">Desa la contrasenya</button>
             </div>
-            <button class="save-button" id="save-btn">Desa els canvis</button>
         </div>
         <div class="badge" id="contributor-badge">🎖️ Contribuïdor</div>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBorKfyhu643HNOFAdPr_jSsrmDgG7ig1I",
+            authDomain: "arcadeblast-c28e9.firebaseapp.com",
+            projectId: "arcadeblast-c28e9",
+            storageBucket: "arcadeblast-c28e9.appspot.com",
+            messagingSenderId: "195192005739",
+            appId: "1:195192005739:web:01b1c129085ea47acd7d2e",
+            measurementId: "G-N4LLYWXM3Q"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+        const storage = getStorage();
+
         const editBtn = document.getElementById('edit-btn');
-        const saveBtn = document.getElementById('save-btn');
+        const saveUsernameBtn = document.getElementById('save-username-btn');
+        const savePasswordBtn = document.getElementById('save-password-btn');
         const backBtn = document.getElementById('back-btn');
         const profileImage = document.getElementById('profile-image');
         const imageInput = document.getElementById('image-input');
@@ -229,12 +251,19 @@
         const buttonContainer = document.getElementById('button-container');
         const contributorBadge = document.getElementById('contributor-badge');
 
-        // Example: Check if the user is a contributor (this should be set based on actual user data)
-        const isContributor = true; // Replace this with actual logic
-
-        if (isContributor) {
-            contributorBadge.style.display = 'block';
-        }
+        // Show user profile information
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('display-username').textContent = '@' + (user.displayName || 'Anonymous');
+                document.getElementById('display-email').textContent = user.email;
+                if (user.photoURL) {
+                    profileImage.src = user.photoURL;
+                }
+            } else {
+                alert("No hi ha cap usuari autenticat.");
+                window.location.href = 'login.html';  // Redirect to login page
+            }
+        });
 
         editBtn.addEventListener('click', function () {
             editForm.style.display = 'block';
@@ -244,29 +273,50 @@
             profileImage.style.cursor = 'pointer';
         });
 
-        saveBtn.addEventListener('click', function () {
+        saveUsernameBtn.addEventListener('click', async function () {
             const username = document.getElementById('edit-username').value;
-            const email = document.getElementById('edit-email').value;
 
             if (!username) {
                 alert("El nom d’usuari és obligatori.");
                 return;
             }
 
-            if (!email) {
-                alert("El correu electrònic és obligatori.");
+            const user = auth.currentUser;
+
+            try {
+                await updateProfile(user, { displayName: username });
+                document.getElementById('display-username').textContent = '@' + username;
+
+                editForm.style.display = 'none';
+                profileInfo.style.display = 'block';
+                editBtn.style.display = 'inline-block';
+                backBtn.style.display = 'inline-block';
+                profileImage.style.cursor = 'default';
+                buttonContainer.insertBefore(editBtn, backBtn);
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+
+        savePasswordBtn.addEventListener('click', async function () {
+            const password = document.getElementById('edit-password').value;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            if (!passwordRegex.test(password)) {
+                alert("La contrasenya ha de tenir una longitud mínima de 8 caràcters, incloure almenys una lletra majúscula, una minúscula, un número i un caràcter especial.");
+                document.getElementById('edit-password').value = "";
                 return;
             }
 
-            document.getElementById('display-username').textContent = '@' + username;
-            document.getElementById('display-email').textContent = email;
+            const user = auth.currentUser;
 
-            editForm.style.display = 'none';
-            profileInfo.style.display = 'block';
-            editBtn.style.display = 'inline-block';
-            backBtn.style.display = 'inline-block';
-            profileImage.style.cursor = 'default';
-            buttonContainer.insertBefore(editBtn, backBtn);
+            try {
+                await updatePassword(user, password);
+                alert("La contrasenya s'ha actualitzat correctament.");
+                document.getElementById('edit-password').value = "";
+            } catch (error) {
+                alert(error.message);
+            }
         });
 
         profileImage.addEventListener('click', function () {
@@ -278,16 +328,38 @@
         imageInput.addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    profileImage.src = e.target.result;
-                }
-                reader.readAsDataURL(file);
+                const user = auth.currentUser;
+                const storageRef = ref(storage, 'profile_images/' + user.uid);
+
+                uploadBytes(storageRef, file).then((snapshot) => {
+                    getDownloadURL(snapshot.ref).then((downloadURL) => {
+                        updateProfile(user, { photoURL: downloadURL }).then(() => {
+                            profileImage.src = downloadURL;
+                        });
+                    });
+                }).catch((error) => {
+                    alert(error.message);
+                });
             }
         });
 
         backBtn.addEventListener('click', function () {
             window.location.href = 'home-page.html';
+        });
+
+        document.querySelectorAll('.show-password').forEach(item => {
+            item.addEventListener('click', event => {
+                let input = event.target.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    event.target.classList.remove('fa-eye');
+                    event.target.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    event.target.classList.remove('fa-eye-slash');
+                    event.target.classList.add('fa-eye');
+                }
+            });
         });
     </script>
     <div class="down">
