@@ -56,12 +56,19 @@
   <canvas width="400" height="400" id="game"></canvas>
   <div id="message">Has perdut!</div>
   <button id="newGame">Nova Partida</button>
+
+  <audio id="eatSound" src="../sounds/snakeEat.mp3"></audio>
+  <audio id="hitSound" src="../sounds/snakeGameOver.mp3"></audio>
+
   <script>
     var canvas = document.getElementById('game');
     var context = canvas.getContext('2d');
     var message = document.getElementById('message');
     var scoreElement = document.getElementById('score');
     var newGameButton = document.getElementById('newGame');
+
+    var eatSound = document.getElementById('eatSound');
+    var hitSound = document.getElementById('hitSound');
 
     var grid = 16;
     var count = 0;
@@ -90,7 +97,7 @@
 
       requestAnimationFrame(loop);
 
-      if (++count < 4) {
+      if (++count < 8) { // Cambia este valor a 8 para ralentizar la serpiente
         return;
       }
 
@@ -124,6 +131,7 @@
         if (cell.x === apple.x && cell.y === apple.y) {
           score += 10;
           scoreElement.textContent = 'Puntuació: ' + score;
+          eatSound.play(); // Reproducir sonido de comer
 
           // Hacer que la serpiente crezca un cuadro
           snake.maxCells++;
@@ -137,6 +145,7 @@
             gameRunning = false;
             message.style.display = 'block';
             newGameButton.style.display = 'block';
+            hitSound.play(); // Reproducir sonido de choque
           }
         }
       });

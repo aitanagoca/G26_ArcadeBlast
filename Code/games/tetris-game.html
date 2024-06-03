@@ -27,6 +27,11 @@
   </div>
   <canvas id="my-canvas"></canvas>
 
+  <audio id="lineClearSound" src="../sounds/tetrisLineClear.mp3"></audio>
+  <audio id="gameOverSound" src="../sounds/tetrisGameOver.mp3"></audio>
+  <audio id="moveSound" src="../sounds/tetrisMove.mp3"></audio>
+  <audio id="rotateSound" src="../sounds/tetrisRotate.mp3"></audio>
+
   <script>
     const delay = (n) => new Promise((r) => setTimeout(r, n));
     const createGrid = (width, height) =>
@@ -148,7 +153,6 @@
     const storage = new LocalStorageManager();
 
     const renderWell = () => {
-      //     ctx.clearRect(9, 9, 278, 460)
       ctx.fillStyle = "black";
       ctx.fillRect(8, 8, 280, 462);
       well.forEach((row, y) =>
@@ -310,6 +314,7 @@
         );
         if (!collided) {
           curTetromino = rotateTet(curTetromino);
+          rotateSound.play(); // Reproduce el sonido de rotación
           return true;
         }
         return false;
@@ -372,6 +377,7 @@
       placeOnWell(state.newCoords);
       state.oldCoords = state.newCoords;
       renderWell();
+      //moveSound.play(); // Reproduce el sonido de movimiento
     };
 
     const clearFullRows = () =>
@@ -379,6 +385,7 @@
       (acc, row) =>
         row.every((c) => !!c)
           ? ((state.score += 10),
+            lineClearSound.play(), // Reproduce el sonido de eliminación de línea
             updateScore(),
             [Array(gBArrayWidth).fill(0), ...acc])
           : [...acc, row],
@@ -392,6 +399,7 @@
       ctx.fillRect(310, 283, 140, 40);
       ctx.fillStyle = "black";
       ctx.fillText(state.winOrLose, 310, 311);
+      gameOverSound.play(); // Reproduce el sonido de game over
     };
 
     const freeFall = (t) => {

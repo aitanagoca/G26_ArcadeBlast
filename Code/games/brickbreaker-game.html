@@ -32,7 +32,12 @@
   <canvas id="canvas" width="720" height="800"></canvas>
   <button onclick="gameManager.downBalls()">Recollir pilota/es</button>
 
+  <audio id="hit-sound" src="../sounds/brickBreakerHit1.wav"></audio>
+  <audio id="bonus-sound" src="../sounds/brickBreakerBonus.wav"></audio>
+  <audio id="game-over-sound" src="../sounds/brickBreakerGameOver.wav"></audio>
+
   <script>
+    let gameOverSoundPlayed = false;
     function randomInt(...args) {
       if (args.length === 1) {
         const [n] = args;
@@ -525,9 +530,6 @@
         this.x = x * 120 + 56;
         this.y = y * 80 + 36 + uiOffsetY;
         this.hit = false;
-
-        //         this.effectR = 18;
-        //         this.effectD = 0.1;
       }
 
       moveDownLittle(state) {
@@ -548,15 +550,10 @@
             this.x = Math.max(this.x - 30, state.ballPos.x);
           }
         }
-
-        //         this.effectR += this.effectD;
-        //         if (this.effectR > 28) this.effectR = 18;
       }
 
       display() {
         circle(this.x, this.y, this.r, "#3dd462");
-        //         if (!this.hit)
-        //             circle(this.x, this.y, this.effectR);
       }
 
       hitWithBall() {
@@ -591,8 +588,8 @@
         ctx.fillText(`Puntuació: ${state.level}`, 30, uiOffsetY / 2 + 7);
         ctx.fillText(
           `Puntuació més alta: ${state.bestLevel}`,
-          30, // Cambia aquí para posicionar a la izquierda
-          uiOffsetY / 2 + 30 // Ajusta el valor de Y si es necesario para que no se solapen
+          30, 
+          uiOffsetY / 2 + 30
         );
       }
 
@@ -610,6 +607,11 @@
         ctx.font = "40px Arial";
         ctx.fillText("Derrota!", width / 2 - 40, height / 2 + 12);
         ctx.font = "20px Arial";
+        if (!gameOverSoundPlayed) {
+          document.getElementById('game-over-sound').play();
+          gameOverSoundPlayed = true;
+        }
+
       }
     }
 
@@ -635,6 +637,7 @@
             const collided = ball.collideWith(brick);
             if (collided) {
               brick.hit();
+              document.getElementById('hit-sound').play();
             }
           });
         });
@@ -644,7 +647,10 @@
         this.balls.forEach((ball) => {
           bonusBalls.forEach((bonusBall) => {
             const collided = ball.collideWithBonusBall(bonusBall);
-            if (collided) bonusBall.hitWithBall();
+            if (collided) {
+              bonusBall.hitWithBall();
+              document.getElementById('bonus-sound').play();
+            }
           });
         });
       }
