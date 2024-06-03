@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, onAuthStateChanged, updateProfile, updatePassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, query, collection, where, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
 
 const firebaseConfig = {
@@ -32,12 +32,24 @@ const contributorBadge = document.getElementById('contributor-badge');
 const uploadBtn = document.getElementById('upload-btn');
 
 // Show user profile information
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
     if (user) {
         document.getElementById('display-username').textContent = '@' + (user.displayName || 'Anonymous');
         document.getElementById('display-email').textContent = user.email;
-        if (user.photoURL) {
-            document.getElementById('profile-image').src = user.photoURL;
+
+        // Buscar el documento del usuario en Firestore usando el correo electrónico
+        const userQuery = query(collection(db, 'users'), where('email', '==', user.email));
+        const querySnapshot = await getDocs(userQuery);
+
+        if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            const userData = userDoc.data();
+
+            if (userData.photoURL) {
+                document.getElementById('profile-image').src = userData.photoURL;
+            }
+        } else {
+            alert('No se encontró el documento del usuario.');
         }
     } else {
         alert("No hay ningún usuario autenticado.");
@@ -56,7 +68,41 @@ editBtn.addEventListener('click', function () {
 });
 
 uploadBtn.addEventListener('click', function () {
-    imageInput.click();
+    const user = auth.currentUser;
+    const file = imageInput.files[0];
+    if (file && user) {
+        const reader = new FileReader();
+        reader.onload = async function (e) {
+            const imageUrl = e.target.result;
+            try {
+                // Subir la imagen al storage
+                const storageRef = ref(storage, `profile_images/${user.uid}`);
+                const snapshot = await uploadBytes(storageRef, file);
+                const downloadURL = await getDownloadURL(snapshot.ref);
+
+                // Buscar el documento del usuario en Firestore usando el correo electrónico
+                const userQuery = query(collection(db, 'users'), where('email', '==', user.email));
+                const querySnapshot = await getDocs(userQuery);
+
+                if (!querySnapshot.empty) {
+                    const userDoc = querySnapshot.docs[0];
+                    // Actualizar el atributo de imagen del usuario en Firestore
+                    await updateDoc(doc(db, 'users', userDoc.id), { photoURL: downloadURL });
+                    
+                    // Actualizar la imagen mostrada en el perfil
+                    profileImage.src = imageUrl;
+
+                    // Mostrar mensaje de éxito
+                    alert('Imagen subida correctamente.');
+                } else {
+                    alert('No se encontró el documento del usuario.');
+                }
+            } catch (error) {
+                alert('Error al subir la imagen: ' + error.message);
+            }
+        };
+        reader.readAsDataURL(file);
+    }
 });
 
 cancelBtn.addEventListener('click', function () {
@@ -82,9 +128,17 @@ saveUsernameBtn.addEventListener('click', async function () {
         document.getElementById('display-username').textContent = '@' + username;
         alert("Se actualizó el nombre de usuario correctamente.");
 
-        // Guardar/Actualizar datos del usuario en Firestore
-        const userDoc = doc(db, 'users', user.uid);
-        await setDoc(userDoc, { username }, { merge: true });
+        // Buscar el documento del usuario en Firestore usando el correo electrónico
+        const userQuery = query(collection(db, 'users'), where('email', '==', user.email));
+        const querySnapshot = await getDocs(userQuery);
+
+        if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            // Actualizar datos del usuario en Firestore
+            await updateDoc(doc(db, 'users', userDoc.id), { username });
+        } else {
+            alert('No se encontró el documento del usuario.');
+        }
 
         // Actualizar nombre de usuario en el local storage
         localStorage.setItem('username', username);
