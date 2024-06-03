@@ -136,6 +136,25 @@
             background-color: #f96eb4;
         }
 
+        .cancel-button {
+            background-color: black;
+            order: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cancel-button:hover {
+            background-color: #181818;
+        }
+
         .back-button {
             background-color: #333;
         }
@@ -171,6 +190,10 @@
             right: 10px;
             cursor: pointer;
             color: #888;
+        }
+
+        .hidden {
+            display: none;
         }
 
         .badge {
@@ -209,14 +232,15 @@
             <div class="form-field">
                 <i class="fa fa-user"></i>
                 <input type="text" id="edit-username" placeholder="Nom d’usuari" value="">
-                <button class="save-button" id="save-username-btn">Desa el nom d’usuari</button>
+                <button class="save-button" id="save-username-btn">Desa</button>
             </div>
             <div class="form-field">
                 <i class="fa fa-lock"></i>
                 <input type="password" id="edit-password" placeholder="Nova contrasenya">
-                <i class="fa fa-eye show-password"></i>
-                <button class="save-button" id="save-password-btn">Desa la contrasenya</button>
+                <i class="fa fa-eye show-password hidden"></i>
+                <button class="save-button" id="save-password-btn">Desa</button>
             </div>
+            <button class="cancel-button" id="cancel-btn">Cancel·lar</button>
         </div>
         <div class="badge" id="contributor-badge">🎖️ Contribuïdor</div>
     </div>
@@ -244,6 +268,7 @@
         const saveUsernameBtn = document.getElementById('save-username-btn');
         const savePasswordBtn = document.getElementById('save-password-btn');
         const backBtn = document.getElementById('back-btn');
+        const cancelBtn = document.getElementById('cancel-btn');
         const profileImage = document.getElementById('profile-image');
         const imageInput = document.getElementById('image-input');
         const editForm = document.getElementById('edit-form');
@@ -271,6 +296,15 @@
             editBtn.style.display = 'none';
             backBtn.style.display = 'none';
             profileImage.style.cursor = 'pointer';
+            document.querySelector('.form-field i.show-password').classList.add('hidden'); // Ocultar el ícono
+        });
+
+        cancelBtn.addEventListener('click', function () {
+            editForm.style.display = 'none';
+            profileInfo.style.display = 'block';
+            editBtn.style.display = 'inline-block';
+            backBtn.style.display = 'inline-block';
+            profileImage.style.cursor = 'default';
         });
 
         saveUsernameBtn.addEventListener('click', async function () {
