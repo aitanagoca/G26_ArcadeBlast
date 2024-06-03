@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Jocs Destacats</title>
+    <link rel="icon" href="images/icons/arcadeblast_icon.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('../Code/images/wallpapers/2134.png');
+            background-size: cover;
+            background-color: #1f0153;
+            color: #f6f4f4;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            padding-bottom: 120px; /* Ajuste para el footer */
+        }
+
+        .container h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 3em;
+            text-shadow: 0 5px #181818;
+            margin-bottom: 40px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            justify-items: center;
+        }
+
+        @keyframes neon {
+            0% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(0, 255, 255, 0.8);
+            }
+
+            100% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+        }
+
+        .game-card {
+            background-color: rgb(29, 33, 38);
+            /* Cambia el color de fondo de la tarjeta según tu preferencia */
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+            width: 350px;
+            height: 300px;
+
+            margin-top: 50px;
+            animation: neon 2s linear infinite;
+            /* Aplica la animación al efecto de brillo neón */
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .game-card::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: calc(100% + 20px);
+            height: calc(100% + 20px);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: neon 2s linear infinite;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 80%;
+            object-fit: cover;
+        }
+
+        .game-card h3 {
+            font-size: 1.5em;
+            color: #f6f4f4;
+        }
+
+        .game-card .cover-image {
+            width: 100%;
+            height: 80%;
+            overflow: hidden;
+        }
+
+        .game-card .cover-image img {
+            width: 100%;
+            height: auto;
+            margin-top: -35px;
+        }
+
+        .down {
+            background-color: #1f0153;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            color: #f6f4f4;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-content {
+            text-align: center;
+            /* Centra el texto dentro del footer */
+        }
+
+        .footer-content a {
+            color: #f6f4f4;
+            /* Ajusta el color de los enlaces */
+            text-decoration: none;
+            margin: 0 5px;
+            /* Espacio entre los enlaces */
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+            /* Subraya los enlaces al pasar el mouse por encima */
+        }
+
+        .category-buttons {
+            display: none; /* Ocultar los botones de categoría */
+        }
+
+        .back-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            z-index: 1100;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <i class="fas fa-arrow-left back-icon" onclick="location.href='home-page.html'"></i>
+    <div class="container">
+        <h1>Jocs Destacats</h1>
+        <div class="games-grid">
+            <!-- Aquí se mostrarán los juegos destacados -->
+            <!-- Ejemplo de juego destacado -->
+            <div class="game-card" data-category="accio" onclick="location.href='brickbreaker-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/brickBreakerCover.webp" alt="Maze">
+                </div>
+                <h3>Brick Breaker</h3>
+            </div>
+            <!-- Fin del ejemplo -->
+        </div>
+    </div>
+    <div class="down">
+        <div class="footer-content">
+            <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
+            <p>
+                <a onclick="location.href='privacy-policy.html'">Política de Privacitat</a> |
+                <a onclick="location.href='terms-of-service.html'">Termes de Servei</a> |
+                <a onclick="location.href='contact.html'">Contacte</a>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

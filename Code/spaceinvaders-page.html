@@ -326,6 +326,16 @@
             text-decoration: underline;
             /* Subraya los enlaces al pasar el mouse por encima */
         }
+
+        .star-icon {
+            position: absolute;
+            top: 480px;
+            /* Ajusta la distancia desde la parte superior del banner */
+            left: 30px;
+            /* Ajusta la distancia desde el borde izquierdo del banner */
+            z-index: 100;
+            /* Asegura que el icono esté por encima del contenido del banner */
+        }
     </style>
 </head>
 
@@ -364,7 +374,10 @@
     </div>
     <div class="game-info">
         <div class="game-details">
-            <div class="game-title">SPACE INVADERS</div>
+            <div class="game-title">
+                SPACE INVADERS
+                <i class="far fa-star star-icon" id="star" onclick="toggleFavorite()"></i>
+            </div>
             <div class="game-description">
                 <p>El teu objectiu és disparar als aliens que es mouen de costat a costat de la pantalla mentre ells
                     intenten aterrar. Maneja la teva nau amb habilitat per esquivar els trets enemics i disparar amb
@@ -401,6 +414,25 @@
             const logoutConfirmed = confirm('Estàs segur que vols tancar sessió?');
             if (logoutConfirmed) {
                 window.location.href = 'welcome.html'; // Redirigir a la página de bienvenida si el usuario confirma el cierre de sesión
+            }
+        }
+
+        let isFavorite = false; // Variable para controlar si el juego está marcado como destacado
+
+        function toggleFavorite() {
+            const starIcon = document.getElementById('star');
+            if (isFavorite) {
+                starIcon.classList.remove('fas', 'fa-star', 'star-selected');
+                starIcon.classList.add('far', 'fa-star');
+                // Quitar el juego de la lista de destacados (puedes implementar esto guardando el estado en localStorage o en una base de datos)
+                // Código para quitar el juego de la lista de destacados...
+                isFavorite = false;
+            } else {
+                starIcon.classList.remove('far', 'fa-star');
+                starIcon.classList.add('fas', 'fa-star', 'star-selected');
+                // Agregar el juego a la lista de destacados (puedes implementar esto guardando el estado en localStorage o en una base de datos)
+                // Código para agregar el juego a la lista de destacados...
+                isFavorite = true;
             }
         }
     </script>
