@@ -41,7 +41,6 @@
             height: 70px;
             color: #f6f4f4;
             position: relative;
-            /* Cambio de 'fixed' a 'relative' */
             bottom: 0;
             width: 100%;
             margin-top: 40px;
@@ -49,20 +48,16 @@
 
         .footer-content {
             text-align: center;
-            /* Centra el texto dentro del footer */
         }
 
         .footer-content a {
             color: #f6f4f4;
-            /* Ajusta el color de los enlaces */
             text-decoration: none;
             margin: 0 5px;
-            /* Espacio entre los enlaces */
         }
 
         .footer-content a:hover {
             text-decoration: underline;
-            /* Subraya los enlaces al pasar el mouse por encima */
         }
 
         .header .menu-icon {
@@ -233,7 +228,6 @@
 
         .game-card {
             background-color: rgb(29, 33, 38);
-            /* Cambia el color de fondo de la tarjeta según tu preferencia */
             border-radius: 10px;
             overflow: hidden;
             text-align: center;
@@ -243,7 +237,6 @@
 
             margin-top: 50px;
             animation: neon 2s linear infinite;
-            /* Aplica la animación al efecto de brillo neón */
 
             display: flex;
             flex-direction: column;
@@ -300,20 +293,20 @@
     <div class="side-panel" id="side-panel">
         <ul>
             <li><a href="favorites.html"><i class="fas fa-star"></i> Destacats</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Rankings</a></li>
+            <li><a href="#" onclick="showFuturePageAlert()"><i class="fas fa-trophy"></i> Rankings</a></li>
             <li><a href="events-page.html"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
             <li><a href="awards-page.html"><i class="fas fa-medal"></i>Èxits i Recompenses</a></li>
         </ul>
         <ul>
             <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols
                     Contribuir?</a></li>
-            <li><a href="#"><i class="fas fa-cogs"></i> Configuració</a></li>
+            <li><a href="#" onclick="showFuturePageAlert()"><i class="fas fa-cogs"></i> Configuració</a></li>
         </ul>
     </div>
     <div class="user-panel" id="user-panel">
         <ul>
             <li><a href="#" onclick="location.href='user-profile.html'"><i class="fas fa-user"></i> Perfil</a></li>
-            <li><a href="#"><i class="fas fa-users"></i> Amics</a></li>
+            <li><a href="#" onclick="showFuturePageAlert()"><i class="fas fa-users"></i> Amics</a></li>
         </ul>
         <ul>
             <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Tancar sessió</a></li>
@@ -371,6 +364,12 @@
                 </div>
                 <h3>Sudoku</h3>
             </div>
+            <div class="game-card" data-category="accio" onclick="location.href='mariobros-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/mariobrosCover.jpeg" alt="Maze">
+                </div>
+                <h3>Super Mario Bros</h3>
+            </div>
             <div class="game-card" data-category="accio" onclick="location.href='tetris-page.html'">
                 <div class="cover-image">
                     <img src="images/covers/tetrisCover.webp" alt="Maze">
@@ -405,6 +404,10 @@
             document.getElementById('user-panel').classList.toggle('active');
         }
 
+        function showFuturePageAlert() {
+            alert("Aquesta pàgina està en desenvolupament.");
+        }
+
         function filterGamesBySearch() {
             const searchText = document.querySelector('.search-bar').value.toLowerCase();
             const gameCards = document.querySelectorAll('.game-card');
@@ -412,9 +415,9 @@
             gameCards.forEach(card => {
                 const gameTitle = card.querySelector('h3').innerText.toLowerCase();
                 if (gameTitle.includes(searchText)) {
-                    card.style.display = 'flex'; // Mostrar el juego si coincide con la búsqueda
+                    card.style.display = 'flex';
                 } else {
-                    card.style.display = 'none'; // Ocultar el juego si no coincide con la búsqueda
+                    card.style.display = 'none';
                 }
             });
         }
@@ -433,7 +436,7 @@
 
             gameCards.forEach(card => {
                 if (card.getAttribute('data-category') === category || category === 'tots') {
-                    card.style.display = 'flex'; // Mostrar el juego si coincide con la categoría
+                    card.style.display = 'flex';
                     gamesFound = true;
                 } else {
                     card.style.display = 'none';
@@ -453,12 +456,12 @@
             }
         }
 
-        document.querySelector('.category-buttons button').classList.add('active'); // Set 'Tots' as default active
+        document.querySelector('.category-buttons button').classList.add('active');
 
         function confirmLogout() {
             const logoutConfirmed = confirm('Estàs segur que vols tancar sessió?');
             if (logoutConfirmed) {
-                window.location.href = 'welcome.html'; // Redirigir a la página de bienvenida si el usuario confirma el cierre de sesión
+                window.location.href = 'welcome.html';
             }
         }
     </script>

@@ -33,7 +33,6 @@ async function handleFormSubmit() {
         const userEmail = user.email;
         console.log('User email:', userEmail);
 
-        // Sube el archivo a Firebase Storage
         const storageRef = ref(storage, `requestedGames/${userEmail}/${file.name}`);
         try {
             const snapshot = await uploadBytes(storageRef, file);
@@ -42,19 +41,16 @@ async function handleFormSubmit() {
             const downloadURL = await getDownloadURL(snapshot.ref);
             console.log('Download URL:', downloadURL);
 
-            // Buscar el documento del usuario en Firestore usando el correo electrónico
             const userQuery = query(collection(db, 'users'), where('email', '==', userEmail));
             const querySnapshot = await getDocs(userQuery);
 
             if (!querySnapshot.empty) {
                 const userDoc = querySnapshot.docs[0];
-                // Actualizar el atributo de requestedGame del usuario en Firestore
                 await updateDoc(doc(db, 'users', userDoc.id), { requestedGame: downloadURL });
                 console.log('Firestore document updated successfully');
 
                 alert('La teva proposta s\'ha enviat correctament.');
 
-                // Actualiza la interfaz
                 const form = document.querySelector('.form');
                 const title = document.getElementById('form-title');
                 title.textContent = 'Proposta enviada!';
@@ -109,5 +105,5 @@ document.getElementById('submit-btn').addEventListener('click', async function (
 });
 
 document.getElementById('back-btn').addEventListener('click', function () {
-    window.location.href = 'home-page.html'; // Cambia esto a la URL correcta
+    window.location.href = 'home-page.html';
 });

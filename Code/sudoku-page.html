@@ -15,11 +15,13 @@
             margin: 0;
             font-family: 'Roboto', sans-serif;
             background-image: url('../Code/images/wallpapers/2134.png');
-            /* URL de tu imagen */
             background-size: cover;
             background-color: #1f0153;
             color: #fff;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .header {
@@ -146,7 +148,6 @@
             height: 50vh;
             overflow: hidden;
             border: 10px solid #1f0153;
-            /* Borde rosa */
             box-sizing: border-box;
         }
 
@@ -227,10 +228,8 @@
             color: #fff;
             border: none;
             padding: 1em 2em;
-            /* Tamaño ajustado */
             border-radius: 10px;
             font-size: 1em;
-            /* Tamaño ajustado */
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
             transition: background-color 0.3s;
@@ -250,12 +249,13 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            max-width: 600px;
+            width: 100%;
         }
 
         .review-container h2 {
             font-family: 'Press Start 2P', cursive;
             font-size: 1em;
-            /* Tamaño ajustado */
             margin-bottom: 10px;
             color: #fff;
         }
@@ -267,7 +267,6 @@
             border-radius: 10px;
             padding: 10px;
             font-size: 1em;
-            /* Tamaño ajustado */
             font-family: 'Roboto', sans-serif;
             margin-bottom: 10px;
             box-sizing: border-box;
@@ -278,10 +277,8 @@
             color: #fff;
             border: none;
             padding: 1em 2em;
-            /* Tamaño ajustado */
             border-radius: 10px;
             font-size: 1em;
-            /* Tamaño ajustado */
             cursor: pointer;
             font-family: 'Roboto', sans-serif;
             transition: background-color 0.3s;
@@ -291,50 +288,94 @@
             background-color: #f96eb4;
         }
 
+        .star-icon {
+            position: absolute;
+            top: 480px;
+            left: 30px;
+            z-index: 100;
+        }
+
+        .comments-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2em;
+            color: #fff;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .no-comments-message {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .comments-section {
+            max-width: 600px;
+            width: 100%;
+            margin-top: 20px;
+            padding: 0 20px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .comment {
+            background-color: #fff;
+            color: #1f0153;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .comment p {
+            margin: 5px 0;
+        }
+
+        .comment .username {
+            font-weight: bold;
+        }
+
+        .comment .timestamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 0.8em;
+            color: #999;
+        }
+
         .down {
             background-color: #1f0153;
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             padding: 10px;
+            position: relative;
             display: flex;
+            justify-content: center;
+        }
+
+        .down a {
+            color: #fff;
+            font-size: 1.5em;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer {
+            background-color: #1f0153;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            margin-top: auto;
+        }
+
+        .title-description-container {
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 70px;
-            color: #f6f4f4;
-            position: relative;
-            /* Cambio de 'fixed' a 'relative' */
-            bottom: 0;
-            width: 100%;
-            margin-top: 40px;
-        }
-
-        .footer-content {
-            text-align: center;
-            /* Centra el texto dentro del footer */
-        }
-
-        .footer-content a {
-            color: #f6f4f4;
-            /* Ajusta el color de los enlaces */
-            text-decoration: none;
-            margin: 0 5px;
-            /* Espacio entre los enlaces */
-        }
-
-        .footer-content a:hover {
-            text-decoration: underline;
-            /* Subraya los enlaces al pasar el mouse por encima */
-        }
-
-        .star-icon {
-            position: absolute;
-            top: 480px;
-            /* Ajusta la distancia desde la parte superior del banner */
-            left: 30px;
-            /* Ajusta la distancia desde el borde izquierdo del banner */
-            z-index: 100;
-            /* Asegura que el icono esté por encima del contenido del banner */
         }
     </style>
 </head>
@@ -343,27 +384,28 @@
     <div class="header">
         <div class="header-left">
             <i class="fas fa-bars menu-icon" onclick="toggleMenu()"></i>
-            <i class="fas fa-arrow-left back-icon" onclick="location.href='home-page.html'"></i>
+            <i class="fas fa-arrow-left back-icon" onclick="window.history.back()"></i>
         </div>
-        <input type="text" class="search-bar" placeholder="A què juguem?">
+        <input type="text" class="search-bar" placeholder="A què juguem?" oninput="filterGamesBySearch()">
         <i class="fas fa-user user-icon" onclick="toggleUserPanel()"></i>
     </div>
     <div class="side-panel" id="side-panel">
         <ul>
-            <li><a href="#"><i class="fas fa-star"></i> Destacats</a></li>
-            <li><a href="#"><i class="fas fa-trophy"></i> Rankings</a></li>
-            <li><a href="#"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
+            <li><a href="favorites.html"><i class="fas fa-star"></i> Destacats</a></li>
+            <li><a href="#" onclick="showFuturePageAlert()"><i class="fas fa-trophy"></i> Rankings</a></li>
+            <li><a href="events-page.html"><i class="fas fa-gamepad"></i> Events i Tornejos</a></li>
+            <li><a href="awards-page.html"><i class="fas fa-medal"></i>Èxits i Recompenses</a></li>
         </ul>
         <ul>
             <li><a href="#" onclick="location.href='game-request.html'"><i class="fas fa-hand-holding-heart"></i> Vols
                     Contribuir?</a></li>
-            <li><a href="#"><i class="fas fa-cogs"></i> Configuració</a></li>
+            <li><a href="#" onclick="showFuturePageAlert()"><i class="fas fa-cogs"></i> Configuració</a></li>
         </ul>
     </div>
     <div class="user-panel" id="user-panel">
         <ul>
             <li><a href="#" onclick="location.href='user-profile.html'"><i class="fas fa-user"></i> Perfil</a></li>
-            <li><a href="#"><i class="fas fa-users"></i> Amics</a></li>
+            <li><a href="#" onclick="showFuturePageAlert()"><i class="fas fa-users"></i> Amics</a></li>
         </ul>
         <ul>
             <li><a href="#" onclick="confirmLogout()"><i class="fas fa-sign-out-alt"></i> Tancar sessió</a></li>
@@ -375,7 +417,7 @@
     <div class="game-info">
         <div class="game-details">
             <div class="game-title">
-                SUDOKU
+                <p id="gameTitle">SUDOKU</p>
                 <i class="far fa-star star-icon" id="star" onclick="toggleFavorite()"></i>
             </div>
             <div class="game-description">
@@ -395,10 +437,22 @@
         <div class="review-container">
             <h2>Deixa una ressenya sobre el joc...</h2>
             <textarea placeholder="Escriu aquí la teva ressenya..."></textarea>
-            <button type="submit">ENVIAR</button>
+            <button id="submit-comment">ENVIAR</button>
         </div>
     </div>
+    <div class="comments-section">
+        <h2 class="comments-title">Comentaris</h2>
+    </div>
+    <footer>
+        <p>&copy; 2024 Arcade Blast. Tots els drets reservats.</p>
+        <p>
+            <a onclick="location.href='privacy-policy.html'">Política de Privacitat</a> |
+            <a onclick="location.href='terms-of-service.html'">Termes de Servei</a> |
+            <a onclick="location.href='contact.html'">Contacte</a>
+        </p>
+    </footer>
     <script type="module" src="../Code/firebase/highlight-script.js"></script>
+    <script type="module" src="../Code/firebase/comments-script.js"></script>
     <script>
         function toggleMenu() {
             document.getElementById('side-panel').classList.toggle('active');
@@ -408,42 +462,32 @@
             document.getElementById('user-panel').classList.toggle('active');
         }
 
+        function showFuturePageAlert() {
+            alert("Aquesta pàgina està en desenvolupament.");
+        }
+
         function confirmLogout() {
             const logoutConfirmed = confirm('Estàs segur que vols tancar sessió?');
             if (logoutConfirmed) {
-                window.location.href = 'welcome.html'; // Redirigir a la página de bienvenida si el usuario confirma el cierre de sesión
+                window.location.href = 'welcome.html';
             }
         }
 
-        let isFavorite = false; // Variable para controlar si el juego está marcado como destacado
+        let isFavorite = false;
 
         function toggleFavorite() {
             const starIcon = document.getElementById('star');
             if (isFavorite) {
                 starIcon.classList.remove('fas', 'fa-star', 'star-selected');
                 starIcon.classList.add('far', 'fa-star');
-                // Quitar el juego de la lista de destacados (puedes implementar esto guardando el estado en localStorage o en una base de datos)
-                // Código para quitar el juego de la lista de destacados...
                 isFavorite = false;
             } else {
                 starIcon.classList.remove('far', 'fa-star');
                 starIcon.classList.add('fas', 'fa-star', 'star-selected');
-                // Agregar el juego a la lista de destacados (puedes implementar esto guardando el estado en localStorage o en una base de datos)
-                // Código para agregar el juego a la lista de destacados...
                 isFavorite = true;
             }
         }
     </script>
-    <div class="down">
-        <div class="footer-content">
-            <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
-            <p>
-                <a onclick="location.href='privacy-policy.html'">Política de Privacitat</a> |
-                <a onclick="location.href='terms-of-service.html'">Termes de Servei</a> |
-                <a onclick="location.href='contact.html'">Contacte</a>
-            </p>
-        </div>
-    </div>
 </body>
 
 </html>

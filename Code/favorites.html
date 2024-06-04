@@ -27,7 +27,6 @@
             text-align: center;
             padding: 20px;
             padding-bottom: 120px;
-            /* Ajuste para el footer */
         }
 
         .container h1 {
@@ -60,7 +59,6 @@
 
         .game-card {
             background-color: rgb(29, 33, 38);
-            /* Cambia el color de fondo de la tarjeta según tu preferencia */
             border-radius: 10px;
             overflow: hidden;
             text-align: center;
@@ -70,7 +68,6 @@
 
             margin-top: 50px;
             animation: neon 2s linear infinite;
-            /* Aplica la animación al efecto de brillo neón */
 
             display: none;
             flex-direction: column;
@@ -135,25 +132,20 @@
 
         .footer-content {
             text-align: center;
-            /* Centra el texto dentro del footer */
         }
 
         .footer-content a {
             color: #f6f4f4;
-            /* Ajusta el color de los enlaces */
             text-decoration: none;
             margin: 0 5px;
-            /* Espacio entre los enlaces */
         }
 
         .footer-content a:hover {
             text-decoration: underline;
-            /* Subraya los enlaces al pasar el mouse por encima */
         }
 
         .category-buttons {
             display: none;
-            /* Ocultar los botones de categoría */
         }
 
         .back-icon {
@@ -173,7 +165,7 @@
 </head>
 
 <body>
-    <i class="fas fa-arrow-left back-icon" onclick="location.href='home-page.html'"></i>
+    <i class="fas fa-arrow-left back-icon" onclick="window.history.back()"></i>
     <div class="container">
         <h1>Jocs Destacats</h1>
         <div class="games-grid">
@@ -218,6 +210,12 @@
                     <img src="images/covers/sudokuCover.webp" alt="Maze">
                 </div>
                 <h3>Sudoku</h3>
+            </div>
+            <div class="game-card" data-category="accio" onclick="location.href='mariobros-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/mariobrosCover.jpeg" alt="Maze">
+                </div>
+                <h3>Super Mario Bros</h3>
             </div>
             <div class="game-card" data-category="accio" onclick="location.href='tetris-page.html'">
                 <div class="cover-image">

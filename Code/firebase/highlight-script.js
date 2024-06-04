@@ -16,45 +16,36 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Función para manejar el clic en el ícono de estrella para destacar o quitar el juego
 function toggleFavorite() {
-    // Obtenemos el título del juego
     const gameTitle = document.querySelector('.game-title').textContent.trim();
 
-    // Obtenemos el usuario actualmente autenticado
     const user = auth.currentUser;
 
     if (user) {
-        const userEmail = user.email; // Obtenemos el correo electrónico del usuario
+        const userEmail = user.email;
 
-        // Realizamos la consulta para encontrar el documento del usuario
         const userQuery = query(collection(db, 'users'), where('email', '==', userEmail));
         getDocs(userQuery).then((querySnapshot) => {
             if (!querySnapshot.empty) {
                 const userDoc = querySnapshot.docs[0];
                 const userDocRef = doc(db, 'users', userDoc.id);
 
-                // Actualizamos el documento del usuario con el juego destacado o lo eliminamos
                 const userData = userDoc.data();
                 const highlightedGames = userData.highlightedGames || [];
                 if (highlightedGames.includes(gameTitle)) {
-                    // Si el juego ya está destacado, lo eliminamos
                     updateDoc(userDocRef, {
                         highlightedGames: arrayRemove(gameTitle)
                     }).then(() => {
                         console.log('Juego desmarcado correctamente.');
-                        // Reflejamos el cambio en el icono de estrella
                         markStarIcon(gameTitle, false);
                     }).catch((error) => {
                         console.error('Error al desmarcar el juego:', error);
                     });
                 } else {
-                    // Si el juego no está destacado, lo marcamos
                     updateDoc(userDocRef, {
                         highlightedGames: arrayUnion(gameTitle)
                     }).then(() => {
                         console.log('Juego destacado correctamente.');
-                        // Reflejamos el cambio en el icono de estrella
                         markStarIcon(gameTitle, true);
                     }).catch((error) => {
                         console.error('Error al destacar el juego:', error);
@@ -71,7 +62,6 @@ function toggleFavorite() {
     }
 }
 
-// Función para marcar o desmarcar el ícono de estrella según el estado del juego
 function markStarIcon(gameTitle, isHighlighted) {
     const starIcon = document.getElementById('star');
     if (gameTitle === starIcon.dataset.gameTitle) {
@@ -83,7 +73,6 @@ function markStarIcon(gameTitle, isHighlighted) {
     }
 }
 
-// Observador para verificar el estado de la autenticación
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log('Usuario autenticado:', user.email);
@@ -106,9 +95,7 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// Añadimos un evento al cargar el DOM
 document.addEventListener('DOMContentLoaded', function () {
-    // Obtenemos el elemento del ícono de la estrella y añadimos un evento de clic
     const starIcon = document.getElementById('star');
     starIcon.dataset.gameTitle = document.querySelector('.game-title').textContent.trim();
     starIcon.addEventListener('click', toggleFavorite);

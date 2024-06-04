@@ -1,0 +1,13 @@
+@font-face {
+	font-family: "Emulogic";
+	src: url("../font/emulogic.ttf");
+}
+
+body {
+	background-color: #1f0153;
+	zoom: 160%;
+}
+
+h1 {
+	font-family: "Emulogic";
+}

@@ -31,13 +31,11 @@ const buttonContainer = document.getElementById('button-container');
 const contributorBadge = document.getElementById('contributor-badge');
 const uploadBtn = document.getElementById('upload-btn');
 
-// Show user profile information
 onAuthStateChanged(auth, async (user) => {
     if (user) {
         document.getElementById('display-username').textContent = '@' + (user.displayName || 'Anonymous');
         document.getElementById('display-email').textContent = user.email;
 
-        // Buscar el documento del usuario en Firestore usando el correo electrónico
         const userQuery = query(collection(db, 'users'), where('email', '==', user.email));
         const querySnapshot = await getDocs(userQuery);
 
@@ -49,17 +47,15 @@ onAuthStateChanged(auth, async (user) => {
                 document.getElementById('profile-image').src = userData.photoURL;
             }
 
-            // Verificar si el atributo requestedGame existe en el documento del usuario
             if (userData.requestedGame) {
-                // Mostrar la clase .badge
                 document.querySelector('.badge').style.display = 'inline-block';
             }
         } else {
-            alert('No se encontró el documento del usuario.');
+            alert("No s'ha trobat el document de l'usuari.");
         }
     } else {
-        alert("No hay ningún usuario autenticado.");
-        window.location.href = 'login.html';  // Redirigir a la página de inicio de sesión
+        alert("No hi ha cap usuari autenticat.");
+        window.location.href = 'login.html';
     }
 });
 
@@ -75,36 +71,32 @@ editBtn.addEventListener('click', function () {
 
 uploadBtn.addEventListener('click', function () {
     const user = auth.currentUser;
+    const userEmail = user.email;
     const file = imageInput.files[0];
     if (file && user) {
         const reader = new FileReader();
         reader.onload = async function (e) {
             const imageUrl = e.target.result;
             try {
-                // Subir la imagen al storage
-                const storageRef = ref(storage, `profile_images/${user.uid}`);
+                const storageRef = ref(storage, `profile_images/${userEmail}/${file.name}`);
                 const snapshot = await uploadBytes(storageRef, file);
                 const downloadURL = await getDownloadURL(snapshot.ref);
 
-                // Buscar el documento del usuario en Firestore usando el correo electrónico
                 const userQuery = query(collection(db, 'users'), where('email', '==', user.email));
                 const querySnapshot = await getDocs(userQuery);
 
                 if (!querySnapshot.empty) {
                     const userDoc = querySnapshot.docs[0];
-                    // Actualizar el atributo de imagen del usuario en Firestore
                     await updateDoc(doc(db, 'users', userDoc.id), { photoURL: downloadURL });
 
-                    // Actualizar la imagen mostrada en el perfil
                     profileImage.src = imageUrl;
 
-                    // Mostrar mensaje de éxito
-                    alert('Imagen subida correctamente.');
+                    alert('Imatge pujada correctament.');
                 } else {
-                    alert('No se encontró el documento del usuario.');
+                    alert("No s'ha trobat el document de l'usuari.");
                 }
             } catch (error) {
-                alert('Error al subir la imagen: ' + error.message);
+                alert("Error al pujar l'imatge: " + error.message);
             }
         };
         reader.readAsDataURL(file);
@@ -123,7 +115,7 @@ saveUsernameBtn.addEventListener('click', async function () {
     const username = document.getElementById('edit-username').value;
 
     if (!username) {
-        alert("El nombre de usuario es obligatorio.");
+        alert("El nom d'usuari es obligatori.");
         return;
     }
 
@@ -132,21 +124,18 @@ saveUsernameBtn.addEventListener('click', async function () {
     try {
         await updateProfile(user, { displayName: username });
         document.getElementById('display-username').textContent = '@' + username;
-        alert("Se actualizó el nombre de usuario correctamente.");
+        alert("S'ha actualizat el nom de l'usuari correctament.");
 
-        // Buscar el documento del usuario en Firestore usando el correo electrónico
         const userQuery = query(collection(db, 'users'), where('email', '==', user.email));
         const querySnapshot = await getDocs(userQuery);
 
         if (!querySnapshot.empty) {
             const userDoc = querySnapshot.docs[0];
-            // Actualizar datos del usuario en Firestore
             await updateDoc(doc(db, 'users', userDoc.id), { username });
         } else {
-            alert('No se encontró el documento del usuario.');
+            alert("No s'ha trobat el document de l'usuari.");
         }
 
-        // Actualizar nombre de usuario en el local storage
         localStorage.setItem('username', username);
     } catch (error) {
         alert(error.message);
@@ -158,7 +147,7 @@ savePasswordBtn.addEventListener('click', async function () {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!passwordRegex.test(password)) {
-        alert("La contraseña debe tener una longitud mínima de 8 caracteres, incluir al menos una letra mayúscula, una minúscula, un número y un carácter especial.");
+        alert("La contrasenya ha de tenir una longitud mínima de 8 caràcters, incloure almenys una lletra majúscula, una minúscula, un número i un caràcter especial.");
         document.getElementById('edit-password').value = "";
         return;
     }
@@ -171,8 +160,7 @@ savePasswordBtn.addEventListener('click', async function () {
         document.getElementById('edit-password').value = "";
     } catch (error) {
         if (error.code === 'auth/requires-recent-login') {
-            alert("Esta acción requiere que inicies sesión nuevamente para confirmar tu identidad.");
-            // Redirige al usuario a la página de inicio de sesión para que pueda volver a iniciar sesión.
+            alert("Aquesta acció requereix que tornis a iniciar sessió per confirmar la teva identitat.");
             window.location.href = 'login.html';
         } else {
             alert(error.message);

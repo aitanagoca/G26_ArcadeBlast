@@ -16,7 +16,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Función para mostrar los juegos destacados
 function showHighlightedGames(highlightedGames) {
     const gameCards = document.querySelectorAll('.game-card');
     gameCards.forEach((card) => {
@@ -27,7 +26,6 @@ function showHighlightedGames(highlightedGames) {
     });
 }
 
-// Observador para verificar el estado de la autenticación
 onAuthStateChanged(auth, (user) => {
     if (user) {
         console.log('Usuario autenticado:', user.email);

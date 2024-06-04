@@ -140,6 +140,7 @@
         .terms a:hover {
             text-decoration: underline;
         }
+
         .back-to-home {
             margin-top: 20px;
             font-size: 0.9em;
@@ -153,7 +154,6 @@
         .back-to-home a:hover {
             text-decoration: underline;
         }
-
     </style>
     <script type="module" src="../Code/firebase/register-script.js"></script>
 </head>
@@ -190,7 +190,7 @@
         </div>
         <br>
         <button class="register-button" id="register-btn">Registrar-se</button>
-        <div class="google-button">
+        <div class="google-button" onclick="showFuturePageAlert()">
             <img src="images/icons/google_icon.webp" alt="Google Icon">
             Registrar-se amb Google
         </div>
@@ -198,7 +198,11 @@
             <a href="welcome.html">Tornar a la pàgina principal</a>
         </div>
     </div>
-
+    <script>
+        function showFuturePageAlert() {
+            alert("Aquesta funcionalitat està en desenvolupament.");
+        }
+    </script>
 </body>
 
 </html>

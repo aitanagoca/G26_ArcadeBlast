@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
 <html lang="en" dir="ltr">
 
 <head>
@@ -11,7 +10,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="icon" href="images/icons/arcadeblast_icon.png" type="image/png">
   <style>
-    /* Import Google font - Poppins */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
     * {
@@ -35,9 +33,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* Cambia esto a center */
       width: 1200px;
-      /* Ajusta el ancho según sea necesario */
       background: #fff9f9;
       border-radius: 10px;
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
@@ -93,7 +89,6 @@
       box-sizing: border-box;
       background-color: #fff9f9;
       width: 90% !important;
-      /* Ajusta el ancho máximo según sea necesario */
       margin: 0 20px;
     }
 
@@ -209,7 +204,7 @@
 </head>
 
 <body>
-  <i class="fas fa-arrow-left back-icon" onclick="location.href='home-page.html'"></i>
+  <i class="fas fa-arrow-left back-icon" onclick="window.history.back()"></i>
   <div class="wrapper">
     <div class="calendar">
       <header>
@@ -231,7 +226,6 @@
       <ul class="days"></ul>
     </div>
     <div class="event-box">
-      asdfasdf
     </div>
   </div>
   <div class="down">
@@ -245,7 +239,6 @@
     </div>
   </div>
   <script>
-    // Array of events
     const events = [
       { year: 2024, month: 5, day: 5, description: "Internacional de Ms.PacMan" },
       { year: 2024, month: 5, day: 8, description: "Semis-Nacional de Pong" },
@@ -286,13 +279,10 @@
       currentDate.innerText = `${months[currMonth]} ${currYear}`;
       daysTag.innerHTML = liTag;
 
-      // Clear the event box
       eventBox.innerHTML = "";
 
-      // Find the events for the current month and year
       const currentEvents = events.filter(event => event.month === currMonth && event.year === currYear);
 
-      // Add the events to the event box
       currentEvents.forEach(event => {
         const eventElement = document.createElement("p");
         eventElement.textContent = `Event del ${event.day}: ${event.description}`;

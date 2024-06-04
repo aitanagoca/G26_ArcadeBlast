@@ -1,10 +1,8 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBorKfyhu643HNOFAdPr_jSsrmDgG7ig1I",
   authDomain: "arcadeblast-c28e9.firebaseapp.com",
@@ -15,14 +13,11 @@ const firebaseConfig = {
   measurementId: "G-N4LLYWXM3Q"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
-// Inicializa Firestore
 const db = getFirestore(app);
 
-// Show/hide password functionality
 document.querySelectorAll('.show-password').forEach(item => {
   item.addEventListener('click', event => {
     let input = event.target.previousElementSibling;
@@ -38,9 +33,8 @@ document.querySelectorAll('.show-password').forEach(item => {
   });
 });
 
-// Register button click event
 document.getElementById('register-btn').addEventListener('click', function (event) {
-  event.preventDefault(); // Prevent default form submission
+  event.preventDefault();
   const username = document.getElementById('username').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
@@ -79,18 +73,14 @@ document.getElementById('register-btn').addEventListener('click', function (even
     return;
   }
 
-  // If all checks pass, proceed with Firebase registration
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Obtiene el usuario registrado
       const user = userCredential.user;
 
-      // Update the user profile with the username
       return updateProfile(user, {
         displayName: username
       })
         .then(() => {
-          // Crea una colección 'users' en Firestore y agrega los datos del usuario
           return addDoc(collection(db, "users"), {
             email: email,
             username: username
@@ -100,7 +90,6 @@ document.getElementById('register-btn').addEventListener('click', function (even
     .then(() => {
       alert('Registre exitós!');
 
-      // Opcionalmente, redirige a home.html
       window.location.href = 'home-page.html';
     })
     .catch((error) => {
