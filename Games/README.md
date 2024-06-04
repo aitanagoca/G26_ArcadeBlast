@@ -8,6 +8,10 @@ Aquest joc clàssic d'arcade consisteix en una paleta que el jugador mou horitzo
 
 En aquest tipus de joc, el jugador ha de navegar per un laberint per arribar a un punt de sortida o objectiu. Els laberints poden variar en complexitat, amb camins que es bifurquen, carrerons sense sortida i altres obstacles. L'objectiu és trobar la ruta correcta a través del laberint el més ràpidament possible. Alguns jocs de laberints poden incloure elements addicionals, com ara enemics, temporitzadors, o objectes col·leccionables.
 
+#### Mario Bros
+
+Mario Bros és un joc clàssic de Nintendo on els germans Mario i Luigi eliminen criatures que surten de les canonades. Els jugadors han de colpejar les plataformes des de sota per capgirar les criatures i després trepitjar-les per eliminar-les. Amb diversos enemics com tortugues, crancs, i mosques, el joc es fa més difícil amb nivells avançats i obstacles com boles de foc. Mario Bros ofereix modes de joc tant cooperatius com competitius, combinant acció i estratègia.
+
 ## Propostes Marc: 
 
 #### Sudoku
