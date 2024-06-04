@@ -26,7 +26,8 @@
         .container {
             text-align: center;
             padding: 20px;
-            padding-bottom: 120px; /* Ajuste para el footer */
+            padding-bottom: 120px;
+            /* Ajuste para el footer */
         }
 
         .container h1 {
@@ -71,7 +72,7 @@
             animation: neon 2s linear infinite;
             /* Aplica la animación al efecto de brillo neón */
 
-            display: flex;
+            display: none;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
@@ -151,7 +152,8 @@
         }
 
         .category-buttons {
-            display: none; /* Ocultar los botones de categoría */
+            display: none;
+            /* Ocultar los botones de categoría */
         }
 
         .back-icon {
@@ -175,17 +177,63 @@
     <div class="container">
         <h1>Jocs Destacats</h1>
         <div class="games-grid">
-            <!-- Aquí se mostrarán los juegos destacados -->
-            <!-- Ejemplo de juego destacado -->
             <div class="game-card" data-category="accio" onclick="location.href='brickbreaker-page.html'">
                 <div class="cover-image">
                     <img src="images/covers/brickBreakerCover.webp" alt="Maze">
                 </div>
                 <h3>Brick Breaker</h3>
             </div>
-            <!-- Fin del ejemplo -->
+            <div class="game-card" data-category="aventura" onclick="location.href='maze-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/mazeCover.webp" alt="Maze">
+                </div>
+                <h3>Maze</h3>
+            </div>
+            <div class="game-card" data-category="accio" onclick="location.href='pacman-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/pacManPortada.jpg" alt="Maze">
+                </div>
+                <h3>Pac-Man</h3>
+            </div>
+            <div class="game-card" data-category="esportiu" onclick="location.href='pong-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/pongCover.webp" alt="Maze">
+                </div>
+                <h3>Pong Classic</h3>
+            </div>
+            <div class="game-card" data-category="estrategia" onclick="location.href='snake-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/snakeCover.webp" alt="Maze">
+                </div>
+                <h3>Snake</h3>
+            </div>
+            <div class="game-card" data-category="accio" onclick="location.href='spaceinvaders-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/spaceInvadersCover.webp" alt="Maze">
+                </div>
+                <h3>Space Invaders</h3>
+            </div>
+            <div class="game-card" data-category="estrategia" onclick="location.href='sudoku-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/sudokuCover.webp" alt="Maze">
+                </div>
+                <h3>Sudoku</h3>
+            </div>
+            <div class="game-card" data-category="accio" onclick="location.href='tetris-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/tetrisCover.webp" alt="Maze">
+                </div>
+                <h3>Tetris</h3>
+            </div>
+            <div class="game-card" data-category="accio" onclick="location.href='tugwar-page.html'">
+                <div class="cover-image">
+                    <img src="images/covers/tugWarCover.webp" alt="Maze">
+                </div>
+                <h3>Tug War</h3>
+            </div>
         </div>
     </div>
+    <script type="module" src="../Code/firebase/favorites-script.js"></script>
     <div class="down">
         <div class="footer-content">
             <p>&copy; 2024 ArcadeBlast. Tots els drets reservats.</p>
