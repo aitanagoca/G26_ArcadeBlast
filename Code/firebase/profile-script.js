@@ -48,6 +48,12 @@ onAuthStateChanged(auth, async (user) => {
             if (userData.photoURL) {
                 document.getElementById('profile-image').src = userData.photoURL;
             }
+
+            // Verificar si el atributo requestedGame existe en el documento del usuario
+            if (userData.requestedGame) {
+                // Mostrar la clase .badge
+                document.querySelector('.badge').style.display = 'inline-block';
+            }
         } else {
             alert('No se encontró el documento del usuario.');
         }
@@ -88,7 +94,7 @@ uploadBtn.addEventListener('click', function () {
                     const userDoc = querySnapshot.docs[0];
                     // Actualizar el atributo de imagen del usuario en Firestore
                     await updateDoc(doc(db, 'users', userDoc.id), { photoURL: downloadURL });
-                    
+
                     // Actualizar la imagen mostrada en el perfil
                     profileImage.src = imageUrl;
 

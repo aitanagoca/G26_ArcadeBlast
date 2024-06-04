@@ -175,38 +175,16 @@
             <label for="file-upload" class="file-label">Adjunta el teu joc aquí</label>
             <input type="file" id="file-upload">
             <div class="file-name" id="file-name"></div>
-            <button type="submit" id="submit-btn">ENVIAR</button>
+            <button type="button" id="submit-btn">ENVIAR</button>
         </div>
         <button class="back-button" id="back-btn">Tornar enrere</button>
     </div>
+    <script type="module" src="../Code/firebase/contribution-script.js"></script>
     <script>
         document.getElementById('file-upload').addEventListener('change', function (event) {
             const fileName = event.target.files[0] ? event.target.files[0].name : '';
             const fileNameDisplay = document.getElementById('file-name');
             fileNameDisplay.textContent = fileName ? `🗸 ${fileName}` : '';
-        });
-
-        document.getElementById('submit-btn').addEventListener('click', function () {
-            if (confirm('Segur que vols enviar la proposta?')) {
-                const form = document.querySelector('.form');
-                const title = document.getElementById('form-title');
-                title.textContent = 'Proposta enviada!';
-
-                const textarea = document.getElementById('proposal-textarea');
-                textarea.style.display = 'none';
-
-                const fileLabel = document.querySelector('.file-label');
-                fileLabel.style.display = 'none';
-
-                const fileNameDisplay = document.getElementById('file-name');
-                fileNameDisplay.style.display = 'none';
-
-                const submitButton = document.getElementById('submit-btn');
-                submitButton.style.display = 'none';
-
-                const backButton = document.getElementById('back-btn');
-                backButton.textContent = "Tornar a la pàgina d'inici";
-            }
         });
 
         document.getElementById('back-btn').addEventListener('click', function () {
