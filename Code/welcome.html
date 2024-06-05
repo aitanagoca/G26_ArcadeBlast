@@ -31,6 +31,29 @@
             text-shadow: 0 5px #181818;
         }
 
+        .title span {
+            display: inline-block;
+            transition: transform 0.1s;
+        }
+
+        .space {
+            display: inline-block;
+            width: 20px; /* Adjust the width of the space as needed */
+        }
+
+        @keyframes wave {
+            0%, 60%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .wave {
+            animation: wave 0.4s ease-in-out;
+        }
+
         .arcade-machine {
             background: #2c2f3300;
             margin: auto;
@@ -75,21 +98,83 @@
         img {
             width: 120px;
             margin: 20px 0;
-            transition: filter 0.1s ease-in-out; /* Add transition for smooth effect */
+            transition: filter 0.1s ease-in-out;
         }
 
+        .title span:nth-child(1) {
+            animation-delay: 0s;
+        }
+        .title span:nth-child(2) {
+            animation-delay: 0.05s;
+        }
+        .title span:nth-child(3) {
+            animation-delay: 0.1s;
+        }
+        .title span:nth-child(4) {
+            animation-delay: 0.15s;
+        }
+        .title span:nth-child(5) {
+            animation-delay: 0.2s;
+        }
+        .title span:nth-child(6) {
+            animation-delay: 0.25s;
+        }
+        .title span:nth-child(7) {
+            animation-delay: 0.3s;
+        }
+        .title span:nth-child(8) {
+            animation-delay: 0.35s;
+        }
+        .title span:nth-child(9) {
+            animation-delay: 0.4s;
+        }
+        .title span:nth-child(10) {
+            animation-delay: 0.45s;
+        }
+        .title span:nth-child(11) {
+            animation-delay: 0.5s;
+        }
+        .title span:nth-child(12) {
+            animation-delay: 0.55s;
+        }
+        .title span:nth-child(13) {
+            animation-delay: 0.6s;
+        }
+        .title span:nth-child(14) {
+            animation-delay: 0.65s;
+        }
+        .title span:nth-child(15) {
+            animation-delay: 0.7s;
+        }
+        .title span:nth-child(16) {
+            animation-delay: 0.75s;
+        }
+        .title span:nth-child(17) {
+            animation-delay: 0.8s;
+        }
     </style>
 </head>
 
-
 <body>
     <div class="arcade-container">
-        <a href="javascript:void(0);" onclick="playSound()">
+        <a href="javascript:void(0);" onclick="startWaveEffect()">
             <img id="arcadeIcon" src="images/icons/arcadeblast_icon.png" alt="Arcade Icon">
         </a>
 
-
-        <h1 class="title">ARCADE BLAST</h1>
+        <h1 class="title">
+            <span>A</span>
+            <span>R</span>
+            <span>C</span>
+            <span>A</span>
+            <span>D</span>
+            <span>E</span>
+            <span class="space"></span>
+            <span>B</span>
+            <span>L</span>
+            <span>A</span>
+            <span>S</span>
+            <span>T</span>
+        </h1>
         <div class="arcade-machine">
             <p class="screen-title">Comencem!</p>
             <button class="arcade-button" onclick="location.href='login.html'">JUGAR</button>
@@ -100,9 +185,9 @@
     <audio id="clickSound" src="sounds/mario_coin.mp3"></audio>
 
     <script>
-        var sound = new Audio('sounds/mario_coin.mp3');
-        
-        function playSound() {
+        var sound = new Audio('sounds/gameboy-1.mp3');
+
+        function startWaveEffect() {
             sound.currentTime = 0;
             sound.play();
             var icon = document.getElementById('arcadeIcon');
@@ -115,6 +200,21 @@
             } else {
                 console.error("Image with ID 'arcadeIcon' not found.");
             }
+
+            // Agregar clase wave a cada letra con un retardo para crear el efecto de ola
+            const letters = document.querySelectorAll('.title span:not(.space)');
+            letters.forEach((letter, index) => {
+                setTimeout(() => {
+                    letter.classList.add('wave');
+                }, index * 50);
+            });
+
+            // Eliminar la clase wave después de 1.2s
+            setTimeout(() => {
+                letters.forEach(letter => {
+                    letter.classList.remove('wave');
+                });
+            }, 1200);
         }
     </script>
 

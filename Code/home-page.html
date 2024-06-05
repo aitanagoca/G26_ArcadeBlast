@@ -10,7 +10,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
+        
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -20,7 +20,44 @@
             color: #f6f4f4;
             overflow-x: hidden;
         }
+        
+        .title-letter {
+            display: inline-block;
+            position: relative;
+            transition: transform 0.2s;
+        }
 
+        .title-letter:hover {
+            cursor: pointer;
+        }
+
+        @keyframes jump {
+            0% { transform: translateY(0); }
+            30% { transform: translateY(-30px); }
+            60% { transform: translateY(0); }
+        }
+
+        .jump {
+            animation: jump 0.5s ease-in-out;
+        }
+
+        .coin {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-image: url('images/others/marioCoin.png'); /* Imagen de la moneda */
+            background-size: cover;
+            animation: coin-animation 1s ease-in-out forwards;
+        }
+
+        @keyframes coin-animation {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }   
+        
         .header {
             background-color: #1f0153;
             padding: 10px;
@@ -28,7 +65,10 @@
             align-items: center;
             justify-content: space-between;
         }
-
+        .title-space {
+        display: inline-block;
+        width: 20px; /* Ajusta el ancho del espacio según sea necesario */
+        }
         .down {
             background-color: #1f0153;
             background-size: cover;
@@ -313,7 +353,20 @@
         </ul>
     </div>
     <div class="container">
-        <h1>Arcade Blast</h1>
+        <h1 id="title">
+            <span class="title-letter">A</span>
+            <span class="title-letter">R</span>
+            <span class="title-letter">C</span>
+            <span class="title-letter">A</span>
+            <span class="title-letter">D</span>
+            <span class="title-letter">E</span>
+            <span class="title-space"> </span> <!-- Espacio adicional -->
+            <span class="title-letter">B</span>
+            <span class="title-letter">L</span>
+            <span class="title-letter">A</span>
+            <span class="title-letter">S</span>
+            <span class="title-letter">T</span>
+        </h1>
         <div class="category-buttons">
             <button onclick="filterGames('tots')"><i class="fas fa-th"></i> Tots</button>
             <button onclick="filterGames('accio')"><i class="fas fa-fist-raised"></i> Accio</button>
@@ -465,6 +518,36 @@
             }
         }
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const letters = document.querySelectorAll('.title-letter');
+            const audio = new Audio('sounds/mario-coin.mp3'); // Ruta al archivo de sonido de la moneda
+
+            letters.forEach(letter => {
+                letter.addEventListener('click', function() {
+                    if (letter.textContent === 'C') {
+                        letter.classList.add('jump');
+                        audio.currentTime = 0;
+                        audio.play();
+
+                        const coin = document.createElement('div');
+                        coin.classList.add('coin');
+                        letter.appendChild(coin);
+
+                        coin.addEventListener('animationend', () => {
+                            coin.remove();
+                        });
+
+                        letter.addEventListener('animationend', () => {
+                            letter.classList.remove('jump');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    
 </body>
 
 </html>
