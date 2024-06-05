@@ -75,13 +75,20 @@
         img {
             width: 120px;
             margin: 20px 0;
+            transition: filter 0.1s ease-in-out; /* Add transition for smooth effect */
         }
+
     </style>
 </head>
 
+
 <body>
     <div class="arcade-container">
-        <img src="images/icons/arcadeblast_icon.png" alt="Arcade Icon">
+        <a href="javascript:void(0);" onclick="playSound()">
+            <img id="arcadeIcon" src="images/icons/arcadeblast_icon.png" alt="Arcade Icon">
+        </a>
+
+
         <h1 class="title">ARCADE BLAST</h1>
         <div class="arcade-machine">
             <p class="screen-title">Comencem!</p>
@@ -89,6 +96,27 @@
             <button class="arcade-button" onclick="location.href='register.html'">CREAR COMPTE</button>
         </div>
     </div>
+
+    <audio id="clickSound" src="sounds/mario_coin.mp3"></audio>
+
+    <script>
+        var sound = new Audio('sounds/mario_coin.mp3');
+        
+        function playSound() {
+            sound.currentTime = 0;
+            sound.play();
+            var icon = document.getElementById('arcadeIcon');
+            if (icon) {
+                icon.style.filter = 'sepia(1)'; // Apply a yellow tint
+
+                setTimeout(function() {
+                    icon.style.filter = ''; // Remove the yellow tint after 100ms
+                }, 100);
+            } else {
+                console.error("Image with ID 'arcadeIcon' not found.");
+            }
+        }
+    </script>
 
 </body>
 
