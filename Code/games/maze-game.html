@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -103,6 +104,11 @@
     <button onclick="generateMaze(100)">Infernal (100 x 100)</button>
     <button onclick="print()">Imprimir</button>
   </div>
+
+  <!-- Elementos de audio -->
+  <audio id="moveSound" src="../sounds/mazeMove.wav"></audio>
+  <audio id="winSound" src="../sounds/mazeWin.wav"></audio>
+
   <script>
     const range = (n) => Array.from({ length: n }).map((_, i) => i);
 
@@ -235,6 +241,9 @@
         "blue point"
       );
 
+      const moveSound = document.getElementById("moveSound");
+      const winSound = document.getElementById("winSound");
+
       return (e) => {
         if (!e.key.startsWith("Arrow")) return;
 
@@ -258,12 +267,18 @@
           x += 1;
         }
 
+        moveSound.play(); // Reproducir sonido de movimiento
+
         nextCell = cells[index(x, y)];
         nextCell.innerHTML = point;
         nextCell.classList.add("passed");
 
         currentCell.innerHTML = "";
         currentCell = nextCell;
+
+        if (x === n - 1 && y === n - 1) {
+          winSound.play(); // Reproducir sonido de ganar
+        }
       };
     }
 

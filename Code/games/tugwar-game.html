@@ -162,6 +162,11 @@
     </div>
     <div id="winner-message"></div>
     <button id="replay-button">Tornar a Jugar</button>
+
+    <!-- Add audio elements -->
+    <audio id="click-sound" src="../sounds/tugWarClick.wav"></audio>
+    <audio id="win-sound" src="../sounds/tugWarWin.wav"></audio>
+
     <script>
         document.addEventListener('DOMContentLoaded', (event) => {
             const rope = document.getElementById('rope');
@@ -172,6 +177,8 @@
             const gameContainer = document.getElementById('game-container');
             const player1 = document.getElementById('player1');
             const player2 = document.getElementById('player2');
+            const clickSound = document.getElementById('click-sound');
+            const winSound = document.getElementById('win-sound');
             let ropePosition = 50; // Percentatge (50% és el centre)
             let player1Score = 0;
             let player2Score = 0;
@@ -195,6 +202,16 @@
                 rope.style.backgroundColor = color;
             };
 
+            const playClickSound = () => {
+                clickSound.currentTime = 0;
+                clickSound.play();
+            };
+
+            const playWinSound = () => {
+                winSound.currentTime = 0;
+                winSound.play();
+            };
+
             const moveRope = (direction) => {
                 if (direction === 'left') {
                     ropePosition -= moveAmount;
@@ -212,6 +229,7 @@
 
                 rope.style.left = `${ropePosition}%`;
                 updateRopeColor();
+                playClickSound(); // Play click sound on each move
 
                 // Afegir efectes visuals quan un jugador està a punt de guanyar
                 if (ropePosition <= 10) {
@@ -228,11 +246,13 @@
                     player1Score += 1;
                     winnerMessage.textContent = 'Jugador 1 guanya!';
                     updateScores();
+                    playWinSound(); // Play win sound when a player wins
                     endGame();
                 } else if (ropePosition >= 100) {
                     player2Score += 1;
                     winnerMessage.textContent = 'Jugador 2 guanya!';
                     updateScores();
+                    playWinSound(); // Play win sound when a player wins
                     endGame();
                 }
             };

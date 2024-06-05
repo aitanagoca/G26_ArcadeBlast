@@ -252,6 +252,10 @@
 
     Neteja:
     <button type="button" class="sudokubutton7 js-clear-board-btn">Tauler</button>
+
+    <!-- Add audio elements -->
+    <audio id="click-sound" src="../sounds/sudokuClick.wav"></audio>
+    <audio id="solve-sound" src="../sounds/sudokuWin.wav"></audio>
   </div>
 
   <script>
@@ -273,21 +277,54 @@
         }
       });
 
-    $solveStepBtn.on("click", mySudokuJS.solveStep);
-    $solveAllBtn.on("click", mySudokuJS.solveAll);
-    $clearBoardBtn.on("click", mySudokuJS.clearBoard);
+    // Get audio elements
+    const clickSound = document.getElementById('click-sound');
+    const solveSound = document.getElementById('solve-sound');
+
+    function playClickSound() {
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+
+    function playSolveSound() {
+      solveSound.currentTime = 0;
+      solveSound.play();
+    }
+
+    // Add sound on button clicks
+    $solveStepBtn.on("click", function () {
+      mySudokuJS.solveStep();
+      playClickSound();
+    });
+
+    $solveAllBtn.on("click", function () {
+      mySudokuJS.solveAll();
+      playSolveSound();
+    });
+
+    $clearBoardBtn.on("click", function () {
+      mySudokuJS.clearBoard();
+      playClickSound();
+    });
 
     $generateBoardBtnEasy.on("click", function () {
       mySudokuJS.generateBoard("easy");
+      playClickSound();
     });
+
     $generateBoardBtnMedium.on("click", function () {
       mySudokuJS.generateBoard("medium");
+      playClickSound();
     });
+
     $generateBoardBtnHard.on("click", function () {
       mySudokuJS.generateBoard("hard");
+      playClickSound();
     });
+
     $generateBoardBtnVeryHard.on("click", function () {
       mySudokuJS.generateBoard("very hard");
+      playClickSound();
     });
 
     $candidateToggle.on("change", function () {
@@ -297,6 +334,13 @@
         mySudokuJS.hideCandidates();
     });
     $candidateToggle.trigger("change");
+
+    // Play sound when inputting numbers
+    document.getElementById('sudoku').addEventListener('input', function (e) {
+      if (e.target.tagName === 'INPUT') {
+        playClickSound();
+      }
+    });
 
     document.addEventListener('DOMContentLoaded', function () {
       document.body.style.zoom = "125%";
