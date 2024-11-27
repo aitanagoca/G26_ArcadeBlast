@@ -1,4 +1,4 @@
-# ARCADE BLAST
+# 🎮ARCADE BLAST
 
 Benvingut al projecte Arcade Blast! Aquesta és una pàgina web dedicada a jocs d'arcade clàssics com Snake, Mario Bros, Tetris, Brick Breaker, i més. El projecte està construït utilitzant HTML, CSS i JavaScript, i Firebase per a la base de dades.
 
