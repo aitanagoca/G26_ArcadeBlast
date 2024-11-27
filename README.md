@@ -10,7 +10,6 @@ Benvingut al projecte Arcade Blast! Aquesta és una pàgina web dedicada a jocs 
 - [Instal·lació](#instal·lació)
 - [Ús](#ús)
 - [Contribuïdors](#contribuïdors)
-- [Llicència](#llicència)
 
 ## Descripció
 
